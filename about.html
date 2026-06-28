@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About &mdash; Salinacruz Chihuahuas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+
+    /* ---- STORY SECTION ---- */
+    .story__grid { display: grid; grid-template-columns: 1fr 1.1fr; gap: 5rem; align-items: start; }
+    .story__img { position: relative; border-radius: var(--r); overflow: hidden; }
+    .story__img img { width: 100%; display: block; object-fit: cover; border-radius: var(--r); }
+    .story__img-placeholder { width: 100%; aspect-ratio: 4/5; background: var(--yellow-light); border-radius: var(--r); display: flex; align-items: center; justify-content: center; font-size: 5rem; color: var(--yellow-dark); opacity: .25; }
+    .story__img-caption { position: absolute; bottom: 1.25rem; left: 1.25rem; background: var(--yellow); color: var(--black); font-size: .82rem; font-weight: 700; padding: .6rem 1rem; border-radius: var(--r-sm); box-shadow: var(--shadow); }
+    .story__text { padding-top: .5rem; }
+    .story__text h2 { font-size: clamp(1.7rem, 3.5vw, 2.4rem); margin-bottom: 1.25rem; }
+    .story__text .lead { font-family: var(--serif); font-size: 1.15rem; font-style: italic; color: var(--dark); line-height: 1.75; margin-bottom: 1.25rem; }
+    .story__text p { color: var(--muted); line-height: 1.8; margin-bottom: 1rem; }
+
+    /* ---- PULL QUOTE ---- */
+    .pull-quote { border-left: 4px solid var(--yellow); padding: 1.25rem 1.75rem; margin: 2rem 0; background: var(--yellow-light); border-radius: 0 var(--r-sm) var(--r-sm) 0; }
+    .pull-quote p { font-family: var(--serif); font-size: 1.15rem; font-style: italic; color: var(--dark); line-height: 1.7; margin: 0; }
+    .pull-quote cite { display: block; font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--yellow-dark); margin-top: .75rem; font-style: normal; }
+
+    /* ---- MILESTONES ---- */
+    .milestones { position: relative; padding-left: 2rem; }
+    .milestones::before { content: ''; position: absolute; left: 0; top: .5rem; bottom: .5rem; width: 2px; background: linear-gradient(to bottom, var(--yellow), rgba(245,197,0,.1)); }
+    .milestone { position: relative; padding-bottom: 2.5rem; }
+    .milestone:last-child { padding-bottom: 0; }
+    .milestone::before { content: ''; position: absolute; left: -2.4rem; top: .4rem; width: 12px; height: 12px; border-radius: 50%; background: var(--yellow); border: 2px solid var(--white); box-shadow: 0 0 0 2px var(--yellow); }
+    .milestone__year { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--yellow-dark); margin-bottom: .2rem; }
+    .milestone__title { font-family: var(--serif); font-size: 1.05rem; color: var(--black); margin-bottom: .3rem; }
+    .milestone__desc { font-size: .88rem; color: var(--muted); line-height: 1.65; }
+
+    /* ---- PHILOSOPHY GRID ---- */
+    .philosophy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+    .philosophy-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--r); padding: 2rem 1.75rem; }
+    .philosophy-card__icon { font-size: 2rem; margin-bottom: 1rem; }
+    .philosophy-card h3 { font-family: var(--serif); font-size: 1.15rem; margin-bottom: .75rem; }
+    .philosophy-card p { font-size: .88rem; color: var(--muted); line-height: 1.7; }
+
+    /* ---- INTERNATIONAL ---- */
+    .international__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+    .country-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--r); padding: 1.75rem 1.5rem; text-align: center; }
+    .country-card__flag { font-size: 2.5rem; margin-bottom: .75rem; }
+    .country-card h4 { font-family: var(--serif); font-size: 1rem; margin-bottom: .4rem; }
+    .country-card p { font-size: .82rem; color: var(--muted); }
+
+    /* ---- YVONNE PROFILE ---- */
+    .profile-band { background: var(--black); padding: 5rem 0; }
+    .profile-band__grid { display: grid; grid-template-columns: 340px 1fr; gap: 4rem; align-items: center; }
+    .profile-band__img { border-radius: var(--r); overflow: hidden; border: 3px solid var(--yellow); }
+    .profile-band__img img { width: 100%; display: block; object-fit: cover; }
+    .profile-band__img-placeholder { width: 100%; aspect-ratio: 1; background: rgba(245,197,0,.08); display: flex; align-items: center; justify-content: center; font-size: 5rem; opacity: .3; }
+    .profile-band__text h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); color: var(--white); margin-bottom: 1rem; }
+    .profile-band__text h2 em { color: var(--yellow); font-style: normal; }
+    .profile-band__text p { color: rgba(255,255,255,.65); line-height: 1.8; margin-bottom: 1rem; }
+    .profile-band__text .eyebrow { color: var(--yellow); }
+    .profile-detail { display: flex; gap: 2.5rem; margin-top: 1.75rem; flex-wrap: wrap; }
+    .profile-detail__item { }
+    .profile-detail__label { font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-bottom: .2rem; }
+    .profile-detail__value { font-size: .95rem; font-weight: 600; color: var(--white); }
+
+    @media (max-width: 900px) {
+      .story__grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .philosophy-grid { grid-template-columns: 1fr 1fr; }
+      .international__grid { grid-template-columns: repeat(2, 1fr); }
+      .profile-band__grid { grid-template-columns: 1fr; }
+      .profile-band__img { max-width: 320px; }
+    }
+    @media (max-width: 580px) {
+      .philosophy-grid { grid-template-columns: 1fr; }
+      .international__grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <header id="site-header">
+    <nav class="nav container">
+      <a href="index.html" class="nav__logo">
+        <img src="assets/images/logo.jpg" alt="Salinacruz Chihuahuas" class="nav__logo-img" onerror="this.style.display='none'" />
+        <div class="nav__logo-name">Salinacruz <span>Chihuahuas</span></div>
+      </a>
+      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav__links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html" class="active">About</a></li>
+        <li><a href="show-team.html">Show Team</a></li>
+        <li><a href="champions.html">Champions</a></li>
+        <li><a href="puppies.html">Puppies</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="contact.html" class="btn btn--primary nav__cta">Puppy Enquiry</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== PAGE HERO ===== -->
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow">Our Story</span>
+        <h1>About Salinacruz</h1>
+        <p>From a single Chihuahua in Hamilton to New Zealand&rsquo;s most decorated smooth coat kennel &mdash; the Salinacruz story spans more than 35 years of passion, dedication, and an uncompromising love of the breed.</p>
+      </div>
+    </section>
+
+    <!-- ===== ORIGIN STORY ===== -->
+    <section class="section">
+      <div class="container">
+        <div class="story__grid">
+          <div class="story__img reveal">
+            <img src="assets/images/yvonne.jpg" alt="Yvonne Tester with her Chihuahuas" onerror="this.style.display='none'" />
+            <div class="story__img-placeholder">&#128054;</div>
+            <div class="story__img-caption">Yvonne Tester &mdash; Salinacruz Kennels</div>
+          </div>
+          <div class="story__text reveal">
+            <span class="eyebrow">How It Began</span>
+            <h2>One Chihuahua from a Neighbour</h2>
+            <p class="lead">It started simply &mdash; a Chihuahua acquired from a neighbour in Hamilton. That one little dog set in motion a lifelong journey that would make Yvonne Tester one of New Zealand&rsquo;s most respected Chihuahua breeders.</p>
+            <p>Yvonne established Salinacruz Kennels in 1989, eventually settling in Tauranga where the kennel has been based ever since. What began as a personal fascination with the smooth coat Chihuahua grew into a dedicated breeding programme built on careful study of the standard, selective use of bloodlines, and an uncompromising commitment to producing the best dogs possible.</p>
+            <p>The early years involved learning the breed from the ground up &mdash; studying pedigrees, travelling to shows, seeking out the right dogs to build the foundation of the kennel. That foundation would prove exceptional.</p>
+
+            <div class="pull-quote">
+              <p>&ldquo;You have to love the breed first and the winning second. If you get the dog right, the winning takes care of itself.&rdquo;</p>
+              <cite>Yvonne Tester &mdash; Salinacruz Kennels</cite>
+            </div>
+
+            <p>Over three and a half decades, Salinacruz has produced more than 35 New Zealand champions. Dogs bred here have gone on to win in Australia, America, and South Africa. And in the greatest achievement in New Zealand Chihuahua history, Salinacruz bred Jacko &mdash; New Zealand&rsquo;s first and only Grand Champion Chihuahua.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PHILOSOPHY ===== -->
+    <section class="section section--alt">
+      <div class="container">
+        <div class="section__header reveal">
+          <span class="eyebrow">Our Approach</span>
+          <h2>Breeding Philosophy</h2>
+          <p class="section__desc">Every decision at Salinacruz is guided by the same principles that have shaped the kennel since 1989.</p>
+        </div>
+        <div class="philosophy-grid">
+
+          <div class="philosophy-card reveal">
+            <div class="philosophy-card__icon">&#127942;</div>
+            <h3>Type Above All</h3>
+            <p>Correct Chihuahua type is non-negotiable. Every breeding decision begins with the standard &mdash; the apple dome, the characteristic expression, the proud carriage. Pretty wins in the short term; correct type builds a legacy.</p>
+          </div>
+
+          <div class="philosophy-card reveal">
+            <div class="philosophy-card__icon">&#128200;</div>
+            <h3>Selective Breeding</h3>
+            <p>Salinacruz produces a small number of litters each year. This is deliberate. Fewer litters mean more attention to each one, more careful selection of breeding pairs, and more time to properly evaluate and place every puppy.</p>
+          </div>
+
+          <div class="philosophy-card reveal">
+            <div class="philosophy-card__icon">&#127758;</div>
+            <h3>The Best Bloodlines</h3>
+            <p>When the right dog doesn&rsquo;t exist locally, Salinacruz looks further afield. Imports from Italy and the United States have brought fresh genetics and new dimensions of quality to the breeding programme &mdash; complementing, never replacing, the kennel&rsquo;s own proven lines.</p>
+          </div>
+
+          <div class="philosophy-card reveal">
+            <div class="philosophy-card__icon">&#128140;</div>
+            <h3>Movement &amp; Structure</h3>
+            <p>A Chihuahua should move as well as it stands. Sound structure, correct angulation, and effortless movement are evaluated in every breeding animal and every potential keeper. A dog that moves well is a healthy dog.</p>
+          </div>
+
+          <div class="philosophy-card reveal">
+            <div class="philosophy-card__icon">&#10084;&#65039;</div>
+            <h3>Temperament Matters</h3>
+            <p>The Chihuahua is a big personality in a small package. Salinacruz dogs are confident, alert, and affectionate &mdash; the qualities that make them exceptional show dogs and even better companions. Temperament is never an afterthought.</p>
+          </div>
+
+          <div class="philosophy-card reveal">
+            <div class="philosophy-card__icon">&#127968;</div>
+            <h3>Raised With Care</h3>
+            <p>Every Salinacruz puppy is raised in the home, handled from birth, and socialised to be confident in the world. Puppies are placed only with families who have been carefully considered and who share our commitment to the breed.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== MILESTONES ===== -->
+    <section class="section">
+      <div class="container">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start;">
+          <div class="reveal">
+            <span class="eyebrow">Key Milestones</span>
+            <h2 style="margin-bottom:2.5rem;">35+ Years of History</h2>
+            <div class="milestones">
+              <div class="milestone">
+                <div class="milestone__year">1989</div>
+                <div class="milestone__title">Salinacruz Kennels Established</div>
+                <div class="milestone__desc">Yvonne Tester registers the Salinacruz prefix in Tauranga, New Zealand, beginning what would become one of the country&rsquo;s most successful Chihuahua breeding programmes.</div>
+              </div>
+              <div class="milestone">
+                <div class="milestone__year">Early 1990s</div>
+                <div class="milestone__title">First Champions</div>
+                <div class="milestone__desc">The kennel produces its first homebred New Zealand champions, establishing Salinacruz as a serious force in New Zealand Chihuahua showing.</div>
+              </div>
+              <div class="milestone">
+                <div class="milestone__year">2000s</div>
+                <div class="milestone__title">International Exports Begin</div>
+                <div class="milestone__desc">Salinacruz dogs begin making their mark overseas, with exports to Australia, the United States, and South Africa going on to achieve championship titles in their adopted countries.</div>
+              </div>
+              <div class="milestone">
+                <div class="milestone__year">2010s</div>
+                <div class="milestone__title">Jacko &mdash; NZ&rsquo;s First Grand Champion</div>
+                <div class="milestone__desc">Salinacruz breeds Jacko, who becomes New Zealand&rsquo;s first and only Grand Champion Chihuahua &mdash; a milestone in New Zealand show dog history.</div>
+              </div>
+              <div class="milestone">
+                <div class="milestone__year">2020s</div>
+                <div class="milestone__title">Italian Imports Strengthen the Programme</div>
+                <div class="milestone__desc">Eddie and Otto arrive from Italy, bringing exceptional continental bloodlines. Eddie earns Best in Show at a Specialty; Otto holds titles in both America and New Zealand.</div>
+              </div>
+              <div class="milestone">
+                <div class="milestone__year">Today</div>
+                <div class="milestone__title">35+ NZ Champions &amp; Still Going</div>
+                <div class="milestone__desc">With nine dogs in the current show team and more than 35 champions to the kennel&rsquo;s name, Salinacruz remains at the forefront of New Zealand Chihuahua breeding.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal">
+            <span class="eyebrow">By the Numbers</span>
+            <h2 style="margin-bottom:2.5rem;">The Record Speaks</h2>
+            <div style="display:flex; flex-direction:column; gap:1.25rem;">
+              <div style="background:var(--yellow-light); border-radius:var(--r); padding:1.75rem 2rem; border:1px solid var(--border);">
+                <div style="font-family:var(--serif); font-size:3rem; font-weight:700; color:var(--black); line-height:1;">35+</div>
+                <div style="font-size:.82rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin-top:.3rem;">New Zealand Champions</div>
+              </div>
+              <div style="background:var(--yellow); border-radius:var(--r); padding:1.75rem 2rem;">
+                <div style="font-family:var(--serif); font-size:3rem; font-weight:700; color:var(--black); line-height:1;">1st</div>
+                <div style="font-size:.82rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:rgba(0,0,0,.6); margin-top:.3rem;">NZ Grand Champion Chihuahua (Jacko)</div>
+              </div>
+              <div style="background:var(--yellow-light); border-radius:var(--r); padding:1.75rem 2rem; border:1px solid var(--border);">
+                <div style="font-family:var(--serif); font-size:3rem; font-weight:700; color:var(--black); line-height:1;">4</div>
+                <div style="font-size:.82rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); margin-top:.3rem;">Countries with Salinacruz Champions</div>
+              </div>
+              <div style="background:var(--black); border-radius:var(--r); padding:1.75rem 2rem;">
+                <div style="font-family:var(--serif); font-size:3rem; font-weight:700; color:var(--yellow); line-height:1;">1989</div>
+                <div style="font-size:.82rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.45); margin-top:.3rem;">Year Established in Tauranga, NZ</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== YVONNE PROFILE ===== -->
+    <div class="profile-band">
+      <div class="container">
+        <div class="profile-band__grid">
+          <div class="profile-band__img reveal">
+            <img src="assets/images/yvonne-profile.jpg" alt="Yvonne Tester" onerror="this.style.display='none'" />
+            <div class="profile-band__img-placeholder">&#128054;</div>
+          </div>
+          <div class="profile-band__text reveal">
+            <span class="eyebrow">The Breeder</span>
+            <h2>Meet <em>Yvonne Tester</em></h2>
+            <p>Yvonne Tester has devoted more than 35 years to the smooth coat Chihuahua. Based in Tauranga, she is widely regarded as one of New Zealand&rsquo;s most knowledgeable and accomplished Chihuahua breeders &mdash; a reputation built not on self-promotion but on the quality of dogs that carry the Salinacruz name.</p>
+            <p>An experienced championship show judge, Yvonne brings a deep understanding of the breed standard to every evaluation she makes &mdash; whether in the ring as a judge, or at home when deciding which puppies to keep. That same critical eye has guided every breeding decision at Salinacruz for over three decades.</p>
+            <p>Yvonne is passionate about sharing her knowledge of the breed and is always happy to talk Chihuahuas with people who share her love of these remarkable little dogs.</p>
+            <div class="profile-detail">
+              <div class="profile-detail__item">
+                <div class="profile-detail__label">Kennel Prefix</div>
+                <div class="profile-detail__value">Salinacruz</div>
+              </div>
+              <div class="profile-detail__item">
+                <div class="profile-detail__label">Location</div>
+                <div class="profile-detail__value">Tauranga, NZ</div>
+              </div>
+              <div class="profile-detail__item">
+                <div class="profile-detail__label">Speciality</div>
+                <div class="profile-detail__value">Smooth Coat Chihuahua</div>
+              </div>
+              <div class="profile-detail__item">
+                <div class="profile-detail__label">Breeding Since</div>
+                <div class="profile-detail__value">1989</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== INTERNATIONAL REACH ===== -->
+    <section class="section section--alt">
+      <div class="container">
+        <div class="section__header reveal">
+          <span class="eyebrow">Global Reach</span>
+          <h2>Salinacruz Around the World</h2>
+          <p class="section__desc">Dogs bearing the Salinacruz name have become champions on four continents. A kennel&rsquo;s true legacy is measured by where its dogs go and what they achieve.</p>
+        </div>
+        <div class="international__grid">
+          <div class="country-card reveal">
+            <div class="country-card__flag">&#127475;&#127487;</div>
+            <h4>New Zealand</h4>
+            <p>Home base. 35+ homebred NZ champions and the breed&rsquo;s only Grand Champion.</p>
+          </div>
+          <div class="country-card reveal">
+            <div class="country-card__flag">&#127462;&#127482;</div>
+            <h4>Australia</h4>
+            <p>Salinacruz exports have achieved championship titles across the Tasman.</p>
+          </div>
+          <div class="country-card reveal">
+            <div class="country-card__flag">&#127482;&#127480;</div>
+            <h4>United States</h4>
+            <p>American champions bearing Salinacruz breeding, including dual AM Ch &amp; NZ Ch Otto.</p>
+          </div>
+          <div class="country-card reveal">
+            <div class="country-card__flag">&#127487;&#127462;</div>
+            <h4>South Africa</h4>
+            <p>Salinacruz dogs have travelled to South Africa and earned their titles there too.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="section">
+      <div class="container">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;">
+          <div class="reveal" style="background:var(--black); border-radius:var(--r); padding:3rem; color:var(--white);">
+            <span class="eyebrow" style="color:var(--yellow);">The Dogs</span>
+            <h3 style="font-size:1.5rem; color:var(--white); margin-bottom:.75rem;">Current Show Team</h3>
+            <p style="color:rgba(255,255,255,.6); margin-bottom:1.5rem;">Nine dogs currently competing at championship shows across New Zealand. Meet each one.</p>
+            <a href="show-team.html" class="btn btn--primary">View Show Team</a>
+          </div>
+          <div class="reveal" style="background:var(--yellow-light); border-radius:var(--r); padding:3rem; border:1px solid var(--border);">
+            <span class="eyebrow">Get in Touch</span>
+            <h3 style="font-size:1.5rem; margin-bottom:.75rem;">Puppy Enquiries</h3>
+            <p style="color:var(--muted); margin-bottom:1.5rem;">Salinacruz puppies are occasionally available to the right homes. We&rsquo;d love to hear from you.</p>
+            <a href="contact.html" class="btn btn--dark">Contact Yvonne</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__logo">
+            <img src="assets/images/logo.jpg" alt="Salinacruz Chihuahuas" class="footer__logo-img" onerror="this.style.display='none'" />
+            <div class="footer__logo-name">Salinacruz Chihuahuas</div>
+          </div>
+          <p>Breeding smooth coat Chihuahuas of exceptional quality in Tauranga, New Zealand since 1989. Home of over 35 New Zealand champions.</p>
+        </div>
+        <div>
+          <h5>Quick Links</h5>
+          <ul class="footer__links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="show-team.html">Show Team</a></li>
+            <li><a href="champions.html">Champions</a></li>
+            <li><a href="puppies.html">Puppies</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer__contact">
+          <h5>Contact</h5>
+          <p>Tauranga, New Zealand</p>
+          <a href="tel:075526719">07 552 6719</a>
+          <a href="mailto:yvonne@salinacruzchihuahuas.com">yvonne@salinacruzchihuahuas.com</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2026 Salinacruz Kennels. All rights reserved.</p>
+        <p>Tauranga, New Zealand &middot; Est. 1989</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/nav.js"></script>
+</body>
+</html>
