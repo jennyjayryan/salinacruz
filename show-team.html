@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Show Team &mdash; Salinacruz Chihuahuas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    /* ---- SHOW TEAM PAGE ---- */
+    .team-intro { max-width: 700px; margin: 0 auto 4rem; text-align: center; }
+    .team-intro p { color: var(--muted); font-size: 1.05rem; line-height: 1.75; }
+
+    .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+
+    .team-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; transition: transform .25s, box-shadow .25s; display: flex; flex-direction: column; }
+    .team-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+
+    .team-card__photo { position: relative; height: 320px; background: var(--yellow-light); overflow: hidden; }
+    .team-card__photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform .5s ease; }
+    .team-card:hover .team-card__photo img { transform: scale(1.04); }
+    .team-card__photo-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 4rem; color: var(--yellow-dark); opacity: .25; }
+
+    .team-card__badge { position: absolute; top: 1rem; left: 1rem; display: flex; gap: .4rem; flex-wrap: wrap; }
+    .badge { font-size: .64rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; padding: .25rem .6rem; border-radius: 4px; }
+    .badge--gold { background: var(--yellow); color: var(--black); }
+    .badge--dark { background: var(--black); color: var(--yellow); }
+    .badge--import { background: #2B2610; color: rgba(255,255,255,.85); }
+
+    .team-card__body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+    .team-card__nickname { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--yellow-dark); margin-bottom: .3rem; }
+    .team-card__name { font-family: var(--serif); font-size: 1.05rem; color: var(--black); line-height: 1.4; margin-bottom: 1rem; }
+    .team-card__desc { font-size: .88rem; color: var(--muted); line-height: 1.7; flex: 1; }
+
+    .team-card__divider { height: 1px; background: var(--border); margin: 1rem 0; }
+
+    .team-card__meta { display: flex; justify-content: space-between; align-items: center; font-size: .78rem; }
+    .team-card__gender { font-weight: 600; color: var(--black); }
+    .team-card__gender--dog { color: #1565C0; }
+    .team-card__gender--bitch { color: #AD1457; }
+    .team-card__origin { color: var(--muted); }
+
+    .star-card { grid-column: span 1; border: 2px solid var(--yellow); }
+    .star-card .team-card__photo { height: 360px; }
+
+    .jacko-band { background: var(--black); color: var(--white); padding: 5rem 0; margin: 4rem 0 0; text-align: center; position: relative; overflow: hidden; }
+    .jacko-band::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(245,197,0,.15) 0%, transparent 65%); pointer-events: none; }
+    .jacko-band__inner { position: relative; max-width: 720px; margin: 0 auto; }
+    .jacko-band__crown { font-size: 3rem; margin-bottom: 1rem; display: block; }
+    .jacko-band h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 1rem; }
+    .jacko-band h2 em { color: var(--yellow); font-style: normal; }
+    .jacko-band p { color: rgba(255,255,255,.65); font-size: 1.05rem; line-height: 1.75; }
+
+    @media (max-width: 1024px) { .team-grid { grid-template-columns: repeat(2, 1fr); } .star-card .team-card__photo { height: 320px; } }
+    @media (max-width: 600px) { .team-grid { grid-template-columns: 1fr; } .star-card { grid-column: span 1; } }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <header id="site-header">
+    <nav class="nav container">
+      <a href="index.html" class="nav__logo">
+        <img src="assets/images/logo.jpg" alt="Salinacruz Chihuahuas" class="nav__logo-img" onerror="this.style.display='none'" />
+        <div class="nav__logo-name">Salinacruz <span>Chihuahuas</span></div>
+      </a>
+      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav__links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="show-team.html" class="active">Show Team</a></li>
+        <li><a href="champions.html">Champions</a></li>
+        <li><a href="puppies.html">Puppies</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="contact.html" class="btn btn--primary nav__cta">Puppy Enquiry</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== PAGE HERO ===== -->
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow">In the Ring</span>
+        <h1>Current Show Team</h1>
+        <p>Nine exceptional Chihuahuas competing at the highest level across New Zealand. A mix of homebred champions and carefully selected imports, united by outstanding type and ring presence.</p>
+      </div>
+    </section>
+
+    <!-- ===== TEAM GRID ===== -->
+    <section class="section">
+      <div class="container">
+
+        <div class="team-intro reveal">
+          <p>The Salinacruz show team is the result of more than 35 years of selective breeding, importing the world&rsquo;s best bloodlines, and an uncompromising commitment to the smooth coat Chihuahua standard. Every dog in the team has been chosen for correct structure, breed type, and the character that makes a Chihuahua truly great in the ring.</p>
+        </div>
+
+        <div class="team-grid">
+
+          <!-- EDDIE -->
+          <div class="team-card star-card reveal">
+            <div class="team-card__photo">
+              <img src="assets/images/dog-eddie.jpg" alt="Eddie" />
+              <div class="team-card__photo-placeholder">&#128054;</div>
+              <div class="team-card__badge">
+                <span class="badge badge--gold">BISS</span>
+                <span class="badge badge--import">Imp Italy</span>
+              </div>
+            </div>
+            <div class="team-card__body">
+              <div class="team-card__nickname">&ldquo;Eddie&rdquo;</div>
+              <h2 class="team-card__name">BISS NZ Ch Misty Meadow&rsquo;s Boston-PC</h2>
+              <p class="team-card__desc">A Best in Show Specialist imported from Italy, Eddie is the standout star of the Salinacruz team. His impeccable Italian pedigree has brought new depth to the kennel&rsquo;s breeding programme, combining flawlessly with our homebred lines. A dog of exceptional type, movement, and charisma in the ring.</p>
+              <div class="team-card__divider"></div>
+              <div class="team-card__meta">
+                <span class="team-card__gender team-card__gender--dog">&#9794; Dog</span>
+                <span class="team-card__origin">Imported &mdash; Italy</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARLOS -->
+          <div class="team-card star-card reveal">
+            <div class="team-card__photo">
+              <img src="assets/images/dog-carlos.jpg" alt="Carlos" />
+              <div class="team-card__photo-placeholder">&#128054;</div>
+              <div class="team-card__badge">
+                <span class="badge badge--gold">RBISS</span>
+                <span class="badge badge--dark">Homebred</span>
+              </div>
+            </div>
+            <div class="team-card__body">
+              <div class="team-card__nickname">&ldquo;Carlos&rdquo;</div>
+              <h2 class="team-card__name">RBISS Ch Salinacruz Prince of Bel-Air</h2>
+              <p class="team-card__desc">Reserve Best in Show Specialist and a proud son of Salinacruz. Carlos is proof that the kennel&rsquo;s own breeding produces dogs that can compete and win at the very highest levels. A commanding presence in the ring with superb breed type and showmanship inherited through generations of careful selection.</p>
+              <div class="team-card__divider"></div>
+              <div class="team-card__meta">
+                <span class="team-card__gender team-card__gender--dog">&#9794; Dog</span>
+                <span class="team-card__origin">Homebred &mdash; NZ</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- MARCO -->
+          <div class="team-card star-card reveal">
+            <div class="team-card__photo">
+              <img src="assets/images/dog-marco.jpg" alt="Marco" />
+              <div class="team-card__photo-placeholder">&#128054;</div>
+              <div class="team-card__badge">
+                <span class="badge badge--gold">BISS</span>
+                <span class="badge badge--dark">Homebred</span>
+              </div>
+            </div>
+            <div class="team-card__body">
+              <div class="team-card__nickname">&ldquo;Marco&rdquo;</div>
+              <h2 class="team-card__name">BISS Ch Salinacruz Super Sonic</h2>
+              <p class="team-card__desc">Another Best in Show Specialist carrying the Salinacruz name with distinction. Marco embodies the hallmarks of the kennel&rsquo;s breeding programme &mdash; correct Chihuahua type, beautiful movement, and the natural showmanship that commands attention the moment he enters the ring.</p>
+              <div class="team-card__divider"></div>
+              <div class="team-card__meta">
+                <span class="team-card__gender team-card__gender--dog">&#9794; Dog</span>
+                <span class="team-card__origin">Homebred &mdash; NZ</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- OTTO -->
+          <div class="team-card reveal">
+            <div class="team-card__photo">
+              <img src="assets/images/dog-otto.jpg" alt="Otto" />
+              <div class="team-card__photo-placeholder">&#128054;</div>
+              <div class="team-card__badge">
+                <span class="badge badge--gold">AM Ch</span>
+                <span class="badge badge--gold">NZ Ch</span>
+                <span class="badge badge--import">Imp Italy</span>
+              </div>
+            </div>
+            <div class="team-card__body">
+              <div class="team-card__nickname">&ldquo;Otto&rdquo;</div>
+              <h3 class="team-card__name">AM Ch &amp; NZ Ch Pasticciotto-PC Di San Gimignano</h3>
+              <p class="team-card__desc">A dual American and New Zealand Champion imported from Italy, Otto is one of the most internationally credentialed dogs in the kennel. Champions on two continents speak to the exceptional quality he represents. A cornerstone of the Salinacruz breeding programme.</p>
+              <div class="team-card__divider"></div>
+              <div class="team-card__meta">
+                <span class="team-card__gender team-card__gender--dog">&#9794; Dog</span>
+                <span class="team-card__origin">Imported &mdash; Italy</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CARLA -->
+          <div class="team-card reveal">
+            <div class="team-card__photo">
+              <img src="assets/images/dog-carla.jpg" alt="Carla" />
+              <div class="team-card__photo-placeholder">&#128054;</div>
+              <div class="team-card__badge">
+                <span class="badge badge--gold">Ch</span>
+                <span class="badge badge--dark">Homebred</span>
+              </div>
+            </div>
+            <div class="team-card__body">
+              <div class="team-card__nickname">&ldquo;Carla&rdquo;</div>
+              <h3 class="team-card__name">Ch Salinacruz Madame Sass</h3>
+              <p class="team-card__desc">Carla lives up to her name &mdash; a glamorous, self-assured bitch with all the sass a true Chihuahua should have. A homebred champion with excellent breed type, beautiful head, and a personality that judges and ringside alike cannot help but notice.</p>
+              <div class="team-card__divider"></div>
+              <div class="team-card__meta">
+                <span class="team-card__gender team-card__gender--bitch">&#9792; Bitch</span>
+                <span class="team-card__origin">Homebred &mdash; NZ</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- BELLA -->
+          <div class="team-card reveal">
+            <div class="team-card__photo">
+              <img src="assets/images/dog-bella.jpg" alt="Bella" />
+              <div class="team-card__photo-placeholder">&#128054;</div>
+              <div class="team-card__badge">
+                <span class="badge badge--gold">NZ Ch</span>
+                <span class="badge badge--dark">Homebred</span>
+              </div>
+            </div>
+            <div class="team-card__body">
+              <div class="team-card__nickname">&ldquo;Bella&rdquo;</div>
+              <h3 class="team-card__name">NZ Ch Salinacruz Bella Donna</h3>
+              <p class="team-card__desc">A beautiful homebred New Zealand Champion, Bella Donna epitomises the femininity and elegance that define the best smooth coat bitches. Her clean lines, correct proportions, and effortless movement make her a joy to show and a valuable asset to the breeding programme.</p>
+              <div class="team-card__divider"></div>
+              <div class="team-card__meta">
+                <span class="team-card__gender team-card__gender--bitch">&#9792; Bitch</span>
+                <span class="team-card__origin">Homebred &mdash; NZ</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CLAUDE -->
+          <div class="team-card reveal">
+            <div class="team-card__photo">
+              <img src="assets/images/dog-claude.jpg" alt="Claude" />
+              <div class="team-card__photo-placeholder">&#128054;</div>
+              <div class="team-card__badge">
+                <span class="badge badge--gold">NZ Ch</span>
+              </div>
+            </div>
+            <div class="team-card__body">
+              <div class="team-card__nickname">&ldquo;Claude&rdquo;</div>
+              <h3 class="team-card__name">NZ Ch Salinacruz Van Damme with MadraChi</h3>
+              <p class="team-card__desc">A New Zealand Champion co-owned with MadraChi Kennels, Claude is a testament to the strength of collaboration between top breeders. He combines powerful Salinacruz type with the complementary qualities of his MadraChi partnership, making him a dog of real depth and quality.</p>
+              <div class="team-card__divider"></div>
+              <div class="team-card__meta">
+                <span class="team-card__gender team-card__gender--dog">&#9794; Dog</span>
+                <span class="team-card__origin">Co-owned with MadraChi</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- LOLA -->
+          <div class="team-card reveal">
+            <div class="team-card__photo">
+              <img src="assets/images/dog-lola.jpg" alt="Lola" />
+              <div class="team-card__photo-placeholder">&#128054;</div>
+              <div class="team-card__badge">
+                <span class="badge badge--gold">NZ Ch</span>
+                <span class="badge badge--dark">Homebred</span>
+              </div>
+            </div>
+            <div class="team-card__body">
+              <div class="team-card__nickname">&ldquo;Lola&rdquo;</div>
+              <h3 class="team-card__name">NZ Ch Salinacruz Sharp And Smart</h3>
+              <p class="team-card__desc">Sharp and smart indeed &mdash; Lola is a savvy show bitch who knows exactly what she&rsquo;s doing in the ring. A homebred New Zealand Champion with the intelligence and alertness that are hallmarks of the Chihuahua breed at its best. Alert expression, correct type, and a natural competitor.</p>
+              <div class="team-card__divider"></div>
+              <div class="team-card__meta">
+                <span class="team-card__gender team-card__gender--bitch">&#9792; Bitch</span>
+                <span class="team-card__origin">Homebred &mdash; NZ</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- CHESTER -->
+          <div class="team-card reveal">
+            <div class="team-card__photo">
+              <img src="assets/images/dog-chester.jpg" alt="Chester" />
+              <div class="team-card__photo-placeholder">&#128054;</div>
+              <div class="team-card__badge">
+                <span class="badge badge--dark">Upcoming</span>
+              </div>
+            </div>
+            <div class="team-card__body">
+              <div class="team-card__nickname">&ldquo;Chester&rdquo;</div>
+              <h3 class="team-card__name">Salinacruz Checkout Chester</h3>
+              <p class="team-card__desc">The youngest member of the Salinacruz team and one to watch. Chester is a promising young dog with all the hallmarks of a future champion &mdash; the right structure, the right attitude, and the right breeding behind him. His Salinacruz heritage promises great things ahead.</p>
+              <div class="team-card__divider"></div>
+              <div class="team-card__meta">
+                <span class="team-card__gender team-card__gender--dog">&#9794; Dog</span>
+                <span class="team-card__origin">Homebred &mdash; NZ</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== JACKO BAND ===== -->
+    <div class="jacko-band">
+      <div class="container">
+        <div class="jacko-band__inner reveal">
+          <span class="jacko-band__crown">&#128081;</span>
+          <h2>Home of <em>Jacko</em></h2>
+          <p>Salinacruz is the breeder of <strong style="color:var(--yellow);">Jacko</strong> &mdash; New Zealand&rsquo;s first and only Grand Champion Chihuahua. A milestone in New Zealand show dog history, Jacko&rsquo;s achievement stands as the highest individual honour in New Zealand Chihuahua showing and represents the pinnacle of what the Salinacruz breeding programme has produced.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== CTA ===== -->
+    <section class="section" style="background:var(--yellow-light);">
+      <div class="container" style="text-align:center;">
+        <div class="reveal">
+          <span class="eyebrow">See All Our Champions</span>
+          <h2 style="margin-bottom:1rem;">35+ New Zealand Champions</h2>
+          <p style="color:var(--muted); max-width:520px; margin:0 auto 2rem;">The show team is just the active chapter. Explore the full roll of Salinacruz champions spanning more than three decades of breeding excellence.</p>
+          <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+            <a href="champions.html" class="btn btn--dark">View All Champions</a>
+            <a href="contact.html" class="btn btn--outline">Puppy Enquiry</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__logo">
+            <img src="assets/images/logo.jpg" alt="Salinacruz Chihuahuas" class="footer__logo-img" onerror="this.style.display='none'" />
+            <div class="footer__logo-name">Salinacruz Chihuahuas</div>
+          </div>
+          <p>Breeding smooth coat Chihuahuas of exceptional quality in Tauranga, New Zealand since 1989. Home of over 35 New Zealand champions.</p>
+        </div>
+        <div>
+          <h5>Quick Links</h5>
+          <ul class="footer__links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="show-team.html">Show Team</a></li>
+            <li><a href="champions.html">Champions</a></li>
+            <li><a href="puppies.html">Puppies</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer__contact">
+          <h5>Contact</h5>
+          <p>Tauranga, New Zealand</p>
+          <a href="tel:075526719">07 552 6719</a>
+          <a href="mailto:yvonne@salinacruzchihuahuas.com">yvonne@salinacruzchihuahuas.com</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2026 Salinacruz Kennels. All rights reserved.</p>
+        <p>Tauranga, New Zealand &middot; Est. 1989</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/nav.js"></script>
+</body>
+</html>
