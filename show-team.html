@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -25,9 +25,9 @@
 
     .team-card__badge { position: absolute; top: 1rem; left: 1rem; display: flex; gap: .4rem; flex-wrap: wrap; }
     .badge { font-size: .64rem; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; padding: .25rem .6rem; border-radius: 4px; }
-    .badge--gold { background: var(--yellow); color: var(--black); }
+    .badge--gold { background: linear-gradient(135deg, var(--orange), #F07820); color: var(--white); }
     .badge--dark { background: var(--black); color: var(--yellow); }
-    .badge--import { background: #2B2610; color: rgba(255,255,255,.85); }
+    .badge--import { background: #2B1A0F; color: rgba(255,255,255,.85); }
 
     .team-card__body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
     .team-card__nickname { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--yellow-dark); margin-bottom: .3rem; }
@@ -42,11 +42,11 @@
     .team-card__gender--bitch { color: #AD1457; }
     .team-card__origin { color: var(--muted); }
 
-    .star-card { grid-column: span 1; border: 2px solid var(--yellow); }
+    .star-card { grid-column: span 1; border: 2px solid var(--orange); }
     .star-card .team-card__photo { height: 360px; }
 
     .jacko-band { background: var(--black); color: var(--white); padding: 5rem 0; margin: 4rem 0 0; text-align: center; position: relative; overflow: hidden; }
-    .jacko-band::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(245,197,0,.15) 0%, transparent 65%); pointer-events: none; }
+    .jacko-band::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(224,90,26,.2) 0%, rgba(245,197,0,.1) 40%, transparent 65%); pointer-events: none; }
     .jacko-band__inner { position: relative; max-width: 720px; margin: 0 auto; }
     .jacko-band__crown { font-size: 3rem; margin-bottom: 1rem; display: block; }
     .jacko-band h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 1rem; }
@@ -63,7 +63,7 @@
   <header id="site-header">
     <nav class="nav container">
       <a href="index.html" class="nav__logo">
-        <img src="assets/images/logo.jpg" alt="Salinacruz Chihuahuas" class="nav__logo-img" onerror="this.style.display='none'" />
+        <img src="assets/images/logo.png" alt="Salinacruz Chihuahuas" class="nav__logo-img" onerror="this.style.display='none'" />
         <div class="nav__logo-name">Salinacruz <span>Chihuahuas</span></div>
       </a>
       <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
@@ -337,7 +337,7 @@
       <div class="footer__grid">
         <div>
           <div class="footer__logo">
-            <img src="assets/images/logo.jpg" alt="Salinacruz Chihuahuas" class="footer__logo-img" onerror="this.style.display='none'" />
+            <img src="assets/images/logo.png" alt="Salinacruz Chihuahuas" class="footer__logo-img" onerror="this.style.display='none'" />
             <div class="footer__logo-name">Salinacruz Chihuahuas</div>
           </div>
           <p>Breeding smooth coat Chihuahuas of exceptional quality in Tauranga, New Zealand since 1989. Home of over 35 New Zealand champions.</p>
@@ -370,3 +370,4 @@
   <script src="js/nav.js"></script>
 </body>
 </html>
+

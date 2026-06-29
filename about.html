@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -22,17 +22,17 @@
     .story__text p { color: var(--muted); line-height: 1.8; margin-bottom: 1rem; }
 
     /* ---- PULL QUOTE ---- */
-    .pull-quote { border-left: 4px solid var(--yellow); padding: 1.25rem 1.75rem; margin: 2rem 0; background: var(--yellow-light); border-radius: 0 var(--r-sm) var(--r-sm) 0; }
+    .pull-quote { border-left: 4px solid var(--orange); padding: 1.25rem 1.75rem; margin: 2rem 0; background: var(--orange-light); border-radius: 0 var(--r-sm) var(--r-sm) 0; }
     .pull-quote p { font-family: var(--serif); font-size: 1.15rem; font-style: italic; color: var(--dark); line-height: 1.7; margin: 0; }
-    .pull-quote cite { display: block; font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--yellow-dark); margin-top: .75rem; font-style: normal; }
+    .pull-quote cite { display: block; font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--orange); margin-top: .75rem; font-style: normal; }
 
     /* ---- MILESTONES ---- */
     .milestones { position: relative; padding-left: 2rem; }
-    .milestones::before { content: ''; position: absolute; left: 0; top: .5rem; bottom: .5rem; width: 2px; background: linear-gradient(to bottom, var(--yellow), rgba(245,197,0,.1)); }
+    .milestones::before { content: ''; position: absolute; left: 0; top: .5rem; bottom: .5rem; width: 2px; background: linear-gradient(to bottom, var(--orange), var(--yellow), rgba(245,197,0,.1)); }
     .milestone { position: relative; padding-bottom: 2.5rem; }
     .milestone:last-child { padding-bottom: 0; }
-    .milestone::before { content: ''; position: absolute; left: -2.4rem; top: .4rem; width: 12px; height: 12px; border-radius: 50%; background: var(--yellow); border: 2px solid var(--white); box-shadow: 0 0 0 2px var(--yellow); }
-    .milestone__year { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--yellow-dark); margin-bottom: .2rem; }
+    .milestone::before { content: ''; position: absolute; left: -2.4rem; top: .4rem; width: 12px; height: 12px; border-radius: 50%; background: var(--orange); border: 2px solid var(--white); box-shadow: 0 0 0 2px var(--orange); }
+    .milestone__year { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--orange); margin-bottom: .2rem; }
     .milestone__title { font-family: var(--serif); font-size: 1.05rem; color: var(--black); margin-bottom: .3rem; }
     .milestone__desc { font-size: .88rem; color: var(--muted); line-height: 1.65; }
 
@@ -84,7 +84,7 @@
   <header id="site-header">
     <nav class="nav container">
       <a href="index.html" class="nav__logo">
-        <img src="assets/images/logo.jpg" alt="Salinacruz Chihuahuas" class="nav__logo-img" onerror="this.style.display='none'" />
+        <img src="assets/images/logo.png" alt="Salinacruz Chihuahuas" class="nav__logo-img" onerror="this.style.display='none'" />
         <div class="nav__logo-name">Salinacruz <span>Chihuahuas</span></div>
       </a>
       <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
@@ -355,7 +355,7 @@
       <div class="footer__grid">
         <div>
           <div class="footer__logo">
-            <img src="assets/images/logo.jpg" alt="Salinacruz Chihuahuas" class="footer__logo-img" onerror="this.style.display='none'" />
+            <img src="assets/images/logo.png" alt="Salinacruz Chihuahuas" class="footer__logo-img" onerror="this.style.display='none'" />
             <div class="footer__logo-name">Salinacruz Chihuahuas</div>
           </div>
           <p>Breeding smooth coat Chihuahuas of exceptional quality in Tauranga, New Zealand since 1989. Home of over 35 New Zealand champions.</p>
@@ -388,3 +388,4 @@
   <script src="js/nav.js"></script>
 </body>
 </html>
+
