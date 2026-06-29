@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Puppies &mdash; Salinacruz Chihuahuas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="assets/images/logo.png" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+
+    /* ---- AVAILABILITY BANNER ---- */
+    .availability-band { background: linear-gradient(135deg, var(--orange) 0%, #F07820 50%, var(--yellow) 100%); padding: 1rem 0; text-align: center; }
+    .availability-band p { font-size: .88rem; font-weight: 700; color: var(--black); letter-spacing: .03em; }
+    .availability-band a { text-decoration: underline; text-underline-offset: .2em; }
+
+    /* ---- INTRO SPLIT ---- */
+    .intro-split { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .intro-split__img { border-radius: var(--r); overflow: hidden; position: relative; }
+    .intro-split__img img { width: 100%; display: block; object-fit: cover; aspect-ratio: 4/5; }
+    .intro-split__img-placeholder { aspect-ratio: 4/5; background: var(--yellow-light); border-radius: var(--r); display: flex; align-items: center; justify-content: center; font-size: 5rem; color: var(--yellow-dark); opacity: .25; }
+    .intro-split__img-badge { position: absolute; bottom: 1.25rem; left: 1.25rem; background: linear-gradient(135deg, var(--orange), #F07820); color: var(--white); font-size: .82rem; font-weight: 700; padding: .6rem 1rem; border-radius: var(--r-sm); box-shadow: var(--shadow); }
+    .intro-split__text h2 { font-size: clamp(1.7rem, 3.5vw, 2.4rem); margin-bottom: 1.25rem; }
+    .intro-split__text .lead { font-family: var(--serif); font-size: 1.1rem; font-style: italic; color: var(--dark); line-height: 1.75; margin-bottom: 1.25rem; }
+    .intro-split__text p { color: var(--muted); line-height: 1.8; margin-bottom: 1rem; }
+
+    /* ---- WHAT YOU GET ---- */
+    .included-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 3rem; }
+    .included-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--r); padding: 1.75rem; position: relative; overflow: hidden; }
+    .included-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--orange), var(--yellow)); }
+    .included-card__icon { font-size: 1.75rem; margin-bottom: .75rem; }
+    .included-card h4 { font-family: var(--serif); font-size: 1rem; margin-bottom: .5rem; }
+    .included-card p { font-size: .85rem; color: var(--muted); line-height: 1.65; }
+
+    /* ---- PHOTO GALLERY ---- */
+    .puppy-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; }
+    .puppy-gallery__item { border-radius: var(--r-sm); overflow: hidden; aspect-ratio: 1; background: var(--yellow-light); position: relative; }
+    .puppy-gallery__item img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s; display: block; }
+    .puppy-gallery__item:hover img { transform: scale(1.05); }
+    .puppy-gallery__item--wide { grid-column: span 2; aspect-ratio: 2/1; }
+    .puppy-gallery__placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: var(--yellow-dark); opacity: .2; }
+
+    /* ---- PROCESS ---- */
+    .process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; position: relative; }
+    .process-steps::before { content: ''; position: absolute; top: 2rem; left: 2.5rem; right: 2.5rem; height: 2px; background: linear-gradient(90deg, var(--orange), var(--yellow)); z-index: 0; }
+    .process-step { text-align: center; position: relative; z-index: 1; }
+    .process-step__num { width: 4rem; height: 4rem; border-radius: 50%; background: linear-gradient(135deg, var(--orange), #F07820); color: var(--white); font-family: var(--serif); font-size: 1.4rem; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem; box-shadow: 0 4px 16px rgba(224,90,26,.3); }
+    .process-step h4 { font-family: var(--serif); font-size: 1rem; margin-bottom: .4rem; }
+    .process-step p { font-size: .82rem; color: var(--muted); line-height: 1.6; }
+
+    /* ---- WHAT WE LOOK FOR ---- */
+    .criteria-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .criteria-item { display: flex; gap: .75rem; align-items: flex-start; padding: 1.1rem 1.25rem; background: var(--white); border: 1px solid var(--border); border-radius: var(--r-sm); }
+    .criteria-item__icon { font-size: 1.2rem; flex-shrink: 0; margin-top: .1rem; }
+    .criteria-item h5 { font-size: .9rem; font-weight: 700; margin-bottom: .2rem; }
+    .criteria-item p { font-size: .82rem; color: var(--muted); line-height: 1.5; }
+
+    /* ---- FAQ ---- */
+    .faq-list { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-q { width: 100%; text-align: left; background: none; border: none; padding: 1.25rem 1.5rem; font-size: .95rem; font-weight: 600; color: var(--black); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem; font-family: var(--sans); transition: background .15s; }
+    .faq-q:hover { background: var(--yellow-light); }
+    .faq-q::after { content: '+'; font-size: 1.25rem; font-weight: 300; color: var(--orange); flex-shrink: 0; transition: transform .25s; }
+    .faq-item.open .faq-q::after { transform: rotate(45deg); }
+    .faq-a { display: none; padding: 0 1.5rem 1.25rem; font-size: .9rem; color: var(--muted); line-height: 1.75; }
+    .faq-item.open .faq-a { display: block; }
+
+    /* ---- ENQUIRY BAND ---- */
+    .enquiry-band { background: var(--black); padding: 5rem 0; position: relative; overflow: hidden; }
+    .enquiry-band::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(224,90,26,.18) 0%, rgba(245,197,0,.08) 40%, transparent 65%); pointer-events: none; }
+    .enquiry-band__inner { position: relative; max-width: 680px; margin: 0 auto; text-align: center; }
+    .enquiry-band h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); color: var(--white); margin-bottom: 1rem; }
+    .enquiry-band p { color: rgba(255,255,255,.6); font-size: 1.02rem; line-height: 1.75; margin-bottom: 2rem; }
+    .enquiry-band .eyebrow { color: var(--yellow); }
+    .enquiry-contacts { display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem; }
+    .enquiry-contact { display: flex; align-items: center; gap: .6rem; color: rgba(255,255,255,.7); font-size: .92rem; transition: color .2s; }
+    .enquiry-contact:hover { color: var(--yellow); }
+    .enquiry-contact__icon { font-size: 1.1rem; }
+
+    @media (max-width: 900px) {
+      .intro-split { grid-template-columns: 1fr; gap: 2.5rem; }
+      .process-steps { grid-template-columns: repeat(2, 1fr); }
+      .process-steps::before { display: none; }
+      .included-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .included-grid { grid-template-columns: 1fr; }
+      .criteria-grid { grid-template-columns: 1fr; }
+      .puppy-gallery { grid-template-columns: 1fr 1fr; }
+      .puppy-gallery__item--wide { grid-column: span 2; }
+      .process-steps { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <header id="site-header">
+    <nav class="nav container">
+      <a href="index.html" class="nav__logo">
+        <img src="assets/images/logo.png" alt="Salinacruz Chihuahuas" class="nav__logo-img" onerror="this.style.display='none'" />
+        <div class="nav__logo-name">Salinacruz <span>Chihuahuas</span></div>
+      </a>
+      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav__links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="show-team.html">Show Team</a></li>
+        <li><a href="champions.html">Champions</a></li>
+        <li><a href="puppies.html" class="active">Puppies</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="contact.html" class="btn btn--primary nav__cta">Puppy Enquiry</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ===== AVAILABILITY BANNER ===== -->
+  <div class="availability-band">
+    <div class="container">
+      <p>Puppies are occasionally available &mdash; <a href="#enquire">contact Yvonne</a> to register your interest.</p>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- ===== PAGE HERO ===== -->
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow">Occasionally Available</span>
+        <h1>Salinacruz Puppies</h1>
+        <p>Smooth coat Chihuahua puppies from over 35 years of champion bloodlines, raised in the home with care and raised to the breed standard from day one.</p>
+      </div>
+    </section>
+
+    <!-- ===== INTRO ===== -->
+    <section class="section">
+      <div class="container">
+        <div class="intro-split">
+          <div class="intro-split__img reveal">
+            <img src="assets/images/puppies.jpg" alt="Salinacruz puppies" onerror="this.style.display='none'" />
+            <div class="intro-split__img-placeholder">&#128054;</div>
+            <div class="intro-split__img-badge">Champion Bloodlines Since 1989</div>
+          </div>
+          <div class="intro-split__text reveal">
+            <span class="eyebrow">Bred with Purpose</span>
+            <h2>Not Just a Puppy &mdash; a Salinacruz</h2>
+            <p class="lead">Every Salinacruz puppy comes with three and a half decades of breeding knowledge behind it. These are not accidental litters &mdash; every breeding is planned, considered, and purposeful.</p>
+            <p>Yvonne produces a small number of litters each year. This is by design. Fewer litters means more time with each puppy, more careful observation of development, and more attention to finding exactly the right home for each one.</p>
+            <p>Salinacruz puppies are raised underfoot in the family home from birth. They are handled daily, exposed to household sounds and routines, and socialised to be confident, well-adjusted little dogs long before they go to their new families.</p>
+            <p>Whether you are looking for a show prospect, a breeding dog, or simply a companion of exceptional quality, a Salinacruz puppy is a dog built to last &mdash; in the ring and in the home.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== WHAT'S INCLUDED ===== -->
+    <section class="section section--alt">
+      <div class="container">
+        <div class="section__header reveal">
+          <span class="eyebrow">Every Puppy Comes With</span>
+          <h2>What&rsquo;s Included</h2>
+          <p class="section__desc">Salinacruz puppies leave with everything they need for a great start.</p>
+        </div>
+        <div class="included-grid">
+
+          <div class="included-card reveal">
+            <div class="included-card__icon">&#128196;</div>
+            <h4>Dogs NZ Registration</h4>
+            <p>All Salinacruz puppies are registered with Dogs New Zealand on the main register, with full pedigree documentation provided.</p>
+          </div>
+
+          <div class="included-card reveal">
+            <div class="included-card__icon">&#128137;</div>
+            <h4>Veterinary Health Check</h4>
+            <p>Each puppy receives a full veterinary examination before leaving. Health and soundness are non-negotiable at Salinacruz.</p>
+          </div>
+
+          <div class="included-card reveal">
+            <div class="included-card__icon">&#128138;</div>
+            <h4>Vaccinations</h4>
+            <p>Puppies are vaccinated and wormed to schedule before going to their new homes. A full vaccination record is provided.</p>
+          </div>
+
+          <div class="included-card reveal">
+            <div class="included-card__icon">&#128214;</div>
+            <h4>Pedigree Certificate</h4>
+            <p>A full five-generation pedigree comes with every puppy, so you can see the champion bloodlines behind your dog.</p>
+          </div>
+
+          <div class="included-card reveal">
+            <div class="included-card__icon">&#127860;</div>
+            <h4>Diet &amp; Care Information</h4>
+            <p>A detailed diet sheet and care guide specific to your puppy, covering feeding, grooming, exercise, and settling in advice.</p>
+          </div>
+
+          <div class="included-card reveal">
+            <div class="included-card__icon">&#128222;</div>
+            <h4>Ongoing Support</h4>
+            <p>Yvonne is always available to answer questions. When you buy a Salinacruz puppy, you have a knowledgeable friend in the breed for life.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PUPPY GALLERY ===== -->
+    <section class="section">
+      <div class="container">
+        <div class="section__header reveal">
+          <span class="eyebrow">From Our Litters</span>
+          <h2>Puppy Gallery</h2>
+          <p class="section__desc">Smooth coat Chihuahua puppies from Salinacruz litters past and present.</p>
+        </div>
+        <div class="puppy-gallery reveal">
+          <div class="puppy-gallery__item puppy-gallery__item--wide">
+            <img src="assets/images/puppy1.jpg" alt="Salinacruz puppy" onerror="this.style.display='none'" />
+            <div class="puppy-gallery__placeholder">&#128054;</div>
+          </div>
+          <div class="puppy-gallery__item">
+            <img src="assets/images/puppy2.jpg" alt="Salinacruz puppy" onerror="this.style.display='none'" />
+            <div class="puppy-gallery__placeholder">&#128054;</div>
+          </div>
+          <div class="puppy-gallery__item">
+            <img src="assets/images/puppy3.jpg" alt="Salinacruz puppy" onerror="this.style.display='none'" />
+            <div class="puppy-gallery__placeholder">&#128054;</div>
+          </div>
+          <div class="puppy-gallery__item">
+            <img src="assets/images/puppy4.jpg" alt="Salinacruz puppy" onerror="this.style.display='none'" />
+            <div class="puppy-gallery__placeholder">&#128054;</div>
+          </div>
+          <div class="puppy-gallery__item puppy-gallery__item--wide">
+            <img src="assets/images/puppy5.jpg" alt="Salinacruz puppy" onerror="this.style.display='none'" />
+            <div class="puppy-gallery__placeholder">&#128054;</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== PROCESS ===== -->
+    <section class="section section--alt">
+      <div class="container">
+        <div class="section__header reveal">
+          <span class="eyebrow">How to Apply</span>
+          <h2>The Enquiry Process</h2>
+          <p class="section__desc">Salinacruz puppies go to carefully selected homes. Here&rsquo;s how the process works.</p>
+        </div>
+        <div class="process-steps reveal">
+          <div class="process-step">
+            <div class="process-step__num">1</div>
+            <h4>Get in Touch</h4>
+            <p>Contact Yvonne by phone or email to introduce yourself and tell us what you&rsquo;re looking for in a Chihuahua.</p>
+          </div>
+          <div class="process-step">
+            <div class="process-step__num">2</div>
+            <h4>Have a Chat</h4>
+            <p>Yvonne will have a conversation with you about the breed, your lifestyle, and whether a Salinacruz puppy is the right fit.</p>
+          </div>
+          <div class="process-step">
+            <div class="process-step__num">3</div>
+            <h4>Join the Waiting List</h4>
+            <p>Suitable applicants are placed on a waiting list. We will contact you when a litter is planned or puppies become available.</p>
+          </div>
+          <div class="process-step">
+            <div class="process-step__num">4</div>
+            <h4>Meet Your Puppy</h4>
+            <p>When the time is right, you&rsquo;ll be introduced to your puppy and can visit before they are ready to go home.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== WHAT WE LOOK FOR ===== -->
+    <section class="section">
+      <div class="container">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:start;">
+          <div class="reveal">
+            <span class="eyebrow">Responsible Placement</span>
+            <h2>What We Look For in a Home</h2>
+            <p style="color:var(--muted); line-height:1.8; margin-bottom:1.75rem;">Salinacruz puppies are placed only with families who can offer the right environment. Chihuahuas thrive with people who understand the breed. Here is what matters to us:</p>
+            <div class="criteria-grid">
+              <div class="criteria-item">
+                <span class="criteria-item__icon">&#10003;</span>
+                <div>
+                  <h5>Safe, Secure Home</h5>
+                  <p>A home where the puppy will be safe, secure, and treated as a family member.</p>
+                </div>
+              </div>
+              <div class="criteria-item">
+                <span class="criteria-item__icon">&#10003;</span>
+                <div>
+                  <h5>Time &amp; Attention</h5>
+                  <p>Chihuahuas bond closely and need companionship. We want puppies going to people with time to give.</p>
+                </div>
+              </div>
+              <div class="criteria-item">
+                <span class="criteria-item__icon">&#10003;</span>
+                <div>
+                  <h5>Commitment to Care</h5>
+                  <p>Willingness to provide regular veterinary care, appropriate nutrition, and lifelong commitment.</p>
+                </div>
+              </div>
+              <div class="criteria-item">
+                <span class="criteria-item__icon">&#10003;</span>
+                <div>
+                  <h5>Breed Understanding</h5>
+                  <p>Some knowledge of or willingness to learn about the Chihuahua breed and its specific needs.</p>
+                </div>
+              </div>
+              <div class="criteria-item">
+                <span class="criteria-item__icon">&#10003;</span>
+                <div>
+                  <h5>Supervised with Children</h5>
+                  <p>Families with young children should be committed to supervised interaction — Chihuahuas are small and fragile.</p>
+                </div>
+              </div>
+              <div class="criteria-item">
+                <span class="criteria-item__icon">&#10003;</span>
+                <div>
+                  <h5>Open Communication</h5>
+                  <p>We want to hear how our puppies are doing. We love updates and are always here to help if questions arise.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal">
+            <span class="eyebrow">Common Questions</span>
+            <h2>FAQ</h2>
+            <div class="faq-list" style="margin-top:1.5rem;">
+              <div class="faq-item">
+                <button class="faq-q">How often do you have litters available?</button>
+                <div class="faq-a">Salinacruz produces a small number of carefully planned litters each year. Availability varies — sometimes puppies are available within a few months, sometimes there may be a longer wait. Registering your interest early is the best approach.</div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-q">Do you sell show puppies as well as pets?</button>
+                <div class="faq-a">Yes. Yvonne assesses each litter and identifies show prospects early. If you are interested in a show or breeding quality puppy, please mention this when you make contact — these are placed separately and the selection process may differ.</div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-q">What age do puppies leave for their new homes?</button>
+                <div class="faq-a">Salinacruz puppies do not leave before 10 weeks of age. Given the small size of Chihuahuas, some puppies may be held longer to ensure they are fully ready. The wellbeing of the puppy always comes first.</div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-q">Do you ship puppies?</button>
+                <div class="faq-a">In some circumstances, puppies can travel to their new homes within New Zealand. This is assessed case by case. We prefer that buyers can visit in person if at all possible, and we will discuss all options with you.</div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-q">Can I visit before committing?</button>
+                <div class="faq-a">Yes, and we encourage it. Meeting Yvonne and seeing the environment the puppies are raised in is an important part of the process — for both parties. We want families to feel confident, and we want to feel good about where our puppies are going.</div>
+              </div>
+              <div class="faq-item">
+                <button class="faq-q">Are the puppies microchipped?</button>
+                <div class="faq-a">Yes. All Salinacruz puppies are microchipped before leaving, as required by New Zealand law. Details are provided with your puppy&rsquo;s paperwork.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ENQUIRE ===== -->
+    <div class="enquiry-band" id="enquire">
+      <div class="container">
+        <div class="enquiry-band__inner reveal">
+          <span class="eyebrow">Register Your Interest</span>
+          <h2>Enquire About a Puppy</h2>
+          <p>The best way to secure a Salinacruz puppy is to get in touch early. Yvonne is happy to have a conversation, answer questions, and add you to the waiting list when the time is right.</p>
+          <a href="contact.html" class="btn btn--primary" style="font-size:1rem; padding:.9rem 2.25rem;">Send an Enquiry</a>
+          <div class="enquiry-contacts">
+            <a href="tel:075526719" class="enquiry-contact">
+              <span class="enquiry-contact__icon">&#128222;</span>
+              07 552 6719
+            </a>
+            <a href="mailto:yvonne@salinacruzchihuahuas.com" class="enquiry-contact">
+              <span class="enquiry-contact__icon">&#9993;</span>
+              yvonne@salinacruzchihuahuas.com
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__logo">
+            <img src="assets/images/logo.png" alt="Salinacruz Chihuahuas" class="footer__logo-img" onerror="this.style.display='none'" />
+            <div class="footer__logo-name">Salinacruz Chihuahuas</div>
+          </div>
+          <p>Breeding smooth coat Chihuahuas of exceptional quality in Tauranga, New Zealand since 1989. Home of over 35 New Zealand champions.</p>
+        </div>
+        <div>
+          <h5>Quick Links</h5>
+          <ul class="footer__links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="show-team.html">Show Team</a></li>
+            <li><a href="champions.html">Champions</a></li>
+            <li><a href="puppies.html">Puppies</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer__contact">
+          <h5>Contact</h5>
+          <p>Tauranga, New Zealand</p>
+          <a href="tel:075526719">07 552 6719</a>
+          <a href="mailto:yvonne@salinacruzchihuahuas.com">yvonne@salinacruzchihuahuas.com</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2026 Salinacruz Kennels. All rights reserved.</p>
+        <p>Tauranga, New Zealand &middot; Est. 1989</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/nav.js"></script>
+  <script>
+    document.querySelectorAll('.faq-q').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.closest('.faq-item');
+        const isOpen = item.classList.contains('open');
+        document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+        if (!isOpen) item.classList.add('open');
+      });
+    });
+  </script>
+</body>
+</html>
