@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Champions &mdash; Salinacruz Chihuahuas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+
+    /* ---- GRAND CHAMPION SPOTLIGHT ---- */
+    .grand-champ { background: var(--black); padding: 6rem 0; position: relative; overflow: hidden; }
+    .grand-champ::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 60% 50%, rgba(224,90,26,.22) 0%, rgba(245,197,0,.12) 35%, transparent 65%); pointer-events: none; }
+    .grand-champ__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; position: relative; }
+    .grand-champ__img { border-radius: var(--r); overflow: hidden; position: relative; }
+    .grand-champ__img img { width: 100%; display: block; object-fit: cover; border-radius: var(--r); border: 3px solid var(--yellow); }
+    .grand-champ__img-placeholder { aspect-ratio: 4/5; background: rgba(245,197,0,.06); border-radius: var(--r); display: flex; align-items: center; justify-content: center; font-size: 6rem; opacity: .2; border: 3px solid rgba(245,197,0,.2); }
+    .grand-champ__crown { font-size: 2.5rem; margin-bottom: .75rem; display: block; }
+    .grand-champ__eyebrow { display: inline-block; font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--yellow); background: rgba(245,197,0,.12); border: 1px solid rgba(245,197,0,.3); border-radius: 50px; padding: .35rem 1rem; margin-bottom: 1.25rem; }
+    .grand-champ h2 { font-size: clamp(2rem, 4.5vw, 3.2rem); color: var(--white); line-height: 1.15; margin-bottom: .5rem; }
+    .grand-champ h2 em { color: var(--yellow); font-style: normal; }
+    .grand-champ__reg { font-size: .88rem; color: rgba(255,255,255,.4); margin-bottom: 1.5rem; font-style: italic; }
+    .grand-champ p { color: rgba(255,255,255,.65); line-height: 1.8; margin-bottom: 1rem; font-size: 1.02rem; }
+    .grand-champ__badge { display: inline-flex; align-items: center; gap: .6rem; background: linear-gradient(135deg, var(--orange), #F07820, var(--yellow)); color: var(--black); font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: .6rem 1.25rem; border-radius: 50px; margin-top: .5rem; }
+
+    /* ---- STATS ROW ---- */
+    .champ-stats { background: linear-gradient(90deg, var(--orange) 0%, #F07820 40%, var(--yellow) 100%); padding: 3rem 0; }
+    .champ-stats__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; text-align: center; }
+    .champ-stat__num { font-family: var(--serif); font-size: 2.8rem; font-weight: 700; color: var(--black); line-height: 1; display: block; }
+    .champ-stat__label { font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(0,0,0,.55); margin-top: .35rem; display: block; }
+
+    /* ---- CURRENT CHAMPIONS GRID ---- */
+    .champ-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+    .champ-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; transition: transform .2s, box-shadow .2s; }
+    .champ-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .champ-card__photo { height: 200px; background: var(--yellow-light); overflow: hidden; position: relative; }
+    .champ-card__photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; transition: transform .4s; }
+    .champ-card:hover .champ-card__photo img { transform: scale(1.05); }
+    .champ-card__photo-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: var(--yellow-dark); opacity: .25; }
+    .champ-card__stripe { height: 3px; background: linear-gradient(90deg, var(--orange), var(--yellow)); }
+    .champ-card__body { padding: 1.1rem; }
+    .champ-card__nick { font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--orange); margin-bottom: .2rem; }
+    .champ-card__name { font-family: var(--serif); font-size: .92rem; color: var(--black); line-height: 1.35; margin-bottom: .5rem; }
+    .champ-card__titles { display: flex; flex-wrap: wrap; gap: .3rem; }
+    .champ-card__title { font-size: .62rem; font-weight: 700; background: var(--yellow-light); color: var(--yellow-dark); border: 1px solid var(--border); border-radius: 3px; padding: .12rem .45rem; text-transform: uppercase; letter-spacing: .05em; }
+    .champ-card__title--top { background: linear-gradient(135deg, var(--orange), #F07820); color: var(--white); border-color: transparent; }
+    .champ-card__origin { font-size: .75rem; color: var(--muted); margin-top: .5rem; }
+
+    /* ---- ROLL OF CHAMPIONS ---- */
+    .roll-header { display: grid; grid-template-columns: 1fr auto; align-items: center; margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 2px solid var(--border); }
+    .roll-intro { color: var(--muted); font-size: .92rem; line-height: 1.6; max-width: 640px; margin-bottom: 2.5rem; }
+
+    .roll-table { width: 100%; border-collapse: collapse; }
+    .roll-table th { font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); text-align: left; padding: .6rem 1rem; border-bottom: 1px solid var(--border); }
+    .roll-table td { padding: .85rem 1rem; border-bottom: 1px solid rgba(0,0,0,.05); font-size: .9rem; vertical-align: middle; }
+    .roll-table tr:last-child td { border-bottom: none; }
+    .roll-table tr:hover td { background: var(--yellow-light); }
+    .roll-table .name-cell { font-family: var(--serif); color: var(--black); }
+    .roll-table .nick-cell { color: var(--orange); font-weight: 700; font-size: .82rem; }
+    .roll-table .title-cell { }
+    .roll-badge { display: inline-block; font-size: .62rem; font-weight: 700; background: var(--yellow-light); color: var(--yellow-dark); border: 1px solid var(--border); border-radius: 3px; padding: .1rem .4rem; text-transform: uppercase; margin-right: .25rem; }
+    .roll-badge--special { background: linear-gradient(135deg, var(--orange), #F07820); color: var(--white); border-color: transparent; }
+    .roll-table .country-cell { color: var(--muted); font-size: .82rem; }
+    .roll-table .origin-cell { color: var(--muted); font-size: .82rem; }
+
+    .more-note { background: var(--yellow-light); border: 1px solid var(--border); border-radius: var(--r); padding: 1.5rem 2rem; display: flex; align-items: center; gap: 1rem; margin-top: 2rem; font-size: .9rem; color: var(--muted); }
+    .more-note strong { color: var(--black); }
+
+    /* ---- COUNTRY EXPORTS ---- */
+    .exports-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .export-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--r); padding: 2rem; text-align: center; }
+    .export-card__flag { font-size: 2.5rem; margin-bottom: .75rem; }
+    .export-card h4 { font-family: var(--serif); font-size: 1.1rem; margin-bottom: .5rem; }
+    .export-card p { font-size: .85rem; color: var(--muted); line-height: 1.6; }
+
+    @media (max-width: 1024px) {
+      .champ-grid { grid-template-columns: repeat(2, 1fr); }
+      .grand-champ__grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .grand-champ__img { max-width: 480px; }
+    }
+    @media (max-width: 768px) {
+      .champ-stats__grid { grid-template-columns: repeat(2, 1fr); }
+      .exports-grid { grid-template-columns: 1fr; }
+      .roll-table .origin-cell, .roll-table .country-cell { display: none; }
+    }
+    @media (max-width: 560px) {
+      .champ-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <header id="site-header">
+    <nav class="nav container">
+      <a href="index.html" class="nav__logo">
+        <img src="assets/images/logo.png" alt="Salinacruz Chihuahuas" class="nav__logo-img" onerror="this.style.display='none'" />
+        <div class="nav__logo-name">Salinacruz <span>Chihuahuas</span></div>
+      </a>
+      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav__links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="show-team.html">Show Team</a></li>
+        <li><a href="champions.html" class="active">Champions</a></li>
+        <li><a href="puppies.html">Puppies</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="contact.html" class="btn btn--primary nav__cta">Puppy Enquiry</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== PAGE HERO ===== -->
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow">A Legacy of Excellence</span>
+        <h1>Champions</h1>
+        <p>Over 35 New Zealand champions produced since 1989 &mdash; homebred and imported, dogs and bitches, from Tauranga to the world stage. This is the Salinacruz record.</p>
+      </div>
+    </section>
+
+    <!-- ===== GRAND CHAMPION SPOTLIGHT ===== -->
+    <div class="grand-champ">
+      <div class="container">
+        <div class="grand-champ__grid">
+          <div class="grand-champ__img reveal">
+            <img src="assets/images/dog-jackflash.jpg" alt="Jacko — NZ Grand Champion" onerror="this.style.display='none'" />
+            <div class="grand-champ__img-placeholder">&#128081;</div>
+          </div>
+          <div class="reveal">
+            <span class="grand-champ__crown">&#128081;</span>
+            <div class="grand-champ__eyebrow">New Zealand&rsquo;s Greatest Achievement</div>
+            <h2><em>Jacko</em><br>Grand Champion</h2>
+            <p class="grand-champ__reg">NZ Grand Ch Salinacruz Jack Flash</p>
+            <p>In the history of New Zealand Chihuahua showing, no dog has climbed higher than Jacko. As New Zealand&rsquo;s first &mdash; and to this day only &mdash; Grand Champion Chihuahua, Jacko achieved what no dog of the breed had done before him.</p>
+            <p>The Grand Championship title in New Zealand requires a dog to first become a Champion and then accumulate Challenge Certificates at an elite level far beyond what is required for the standard title. It is a title that demands extraordinary quality, consistency, and longevity in the ring.</p>
+            <p>Bred by Yvonne Tester and proudly carrying the Salinacruz name, Jacko stands as the pinnacle of what the kennel has produced &mdash; and as a milestone in New Zealand show dog history.</p>
+            <div class="grand-champ__badge">&#9733; NZ&rsquo;s First &amp; Only Grand Champion Chihuahua</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== STATS ===== -->
+    <div class="champ-stats">
+      <div class="container">
+        <div class="champ-stats__grid">
+          <div>
+            <span class="champ-stat__num">35+</span>
+            <span class="champ-stat__label">NZ Champions</span>
+          </div>
+          <div>
+            <span class="champ-stat__num">1</span>
+            <span class="champ-stat__label">Grand Champion (Jacko)</span>
+          </div>
+          <div>
+            <span class="champ-stat__num">4</span>
+            <span class="champ-stat__label">Countries</span>
+          </div>
+          <div>
+            <span class="champ-stat__num">35+</span>
+            <span class="champ-stat__label">Years of Champions</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== CURRENT CHAMPIONS ===== -->
+    <section class="section">
+      <div class="container">
+        <div class="section__header reveal">
+          <span class="eyebrow">Active Show Team</span>
+          <h2>Current Title Holders</h2>
+          <p class="section__desc">Titled dogs currently competing at shows across New Zealand.</p>
+        </div>
+        <div class="champ-grid">
+
+          <div class="champ-card reveal">
+            <div class="champ-card__photo">
+              <img src="assets/images/dog-eddie.jpg" alt="Eddie" onerror="this.style.display='none'" />
+              <div class="champ-card__photo-placeholder">&#128054;</div>
+            </div>
+            <div class="champ-card__stripe"></div>
+            <div class="champ-card__body">
+              <div class="champ-card__nick">Eddie</div>
+              <div class="champ-card__name">BISS NZ Ch Misty Meadow&rsquo;s Boston-PC</div>
+              <div class="champ-card__titles">
+                <span class="champ-card__title champ-card__title--top">BISS</span>
+                <span class="champ-card__title">NZ Ch</span>
+              </div>
+              <div class="champ-card__origin">Imported &mdash; Italy</div>
+            </div>
+          </div>
+
+          <div class="champ-card reveal">
+            <div class="champ-card__photo">
+              <img src="assets/images/dog-carlos.jpg" alt="Carlos" onerror="this.style.display='none'" />
+              <div class="champ-card__photo-placeholder">&#128054;</div>
+            </div>
+            <div class="champ-card__stripe"></div>
+            <div class="champ-card__body">
+              <div class="champ-card__nick">Carlos</div>
+              <div class="champ-card__name">RBISS Ch Salinacruz Prince of Bel-Air</div>
+              <div class="champ-card__titles">
+                <span class="champ-card__title champ-card__title--top">RBISS</span>
+                <span class="champ-card__title">Ch</span>
+              </div>
+              <div class="champ-card__origin">Homebred</div>
+            </div>
+          </div>
+
+          <div class="champ-card reveal">
+            <div class="champ-card__photo">
+              <img src="assets/images/dog-marco.jpg" alt="Marco" onerror="this.style.display='none'" />
+              <div class="champ-card__photo-placeholder">&#128054;</div>
+            </div>
+            <div class="champ-card__stripe"></div>
+            <div class="champ-card__body">
+              <div class="champ-card__nick">Marco</div>
+              <div class="champ-card__name">BISS Ch Salinacruz Super Sonic</div>
+              <div class="champ-card__titles">
+                <span class="champ-card__title champ-card__title--top">BISS</span>
+                <span class="champ-card__title">Ch</span>
+              </div>
+              <div class="champ-card__origin">Homebred</div>
+            </div>
+          </div>
+
+          <div class="champ-card reveal">
+            <div class="champ-card__photo">
+              <img src="assets/images/dog-otto.jpg" alt="Otto" onerror="this.style.display='none'" />
+              <div class="champ-card__photo-placeholder">&#128054;</div>
+            </div>
+            <div class="champ-card__stripe"></div>
+            <div class="champ-card__body">
+              <div class="champ-card__nick">Otto</div>
+              <div class="champ-card__name">AM Ch &amp; NZ Ch Pasticciotto-PC Di San Gimignano</div>
+              <div class="champ-card__titles">
+                <span class="champ-card__title champ-card__title--top">AM Ch</span>
+                <span class="champ-card__title">NZ Ch</span>
+              </div>
+              <div class="champ-card__origin">Imported &mdash; Italy</div>
+            </div>
+          </div>
+
+          <div class="champ-card reveal">
+            <div class="champ-card__photo">
+              <img src="assets/images/dog-carla.jpg" alt="Carla" onerror="this.style.display='none'" />
+              <div class="champ-card__photo-placeholder">&#128054;</div>
+            </div>
+            <div class="champ-card__stripe"></div>
+            <div class="champ-card__body">
+              <div class="champ-card__nick">Carla</div>
+              <div class="champ-card__name">Ch Salinacruz Madame Sass</div>
+              <div class="champ-card__titles">
+                <span class="champ-card__title">Ch</span>
+              </div>
+              <div class="champ-card__origin">Homebred</div>
+            </div>
+          </div>
+
+          <div class="champ-card reveal">
+            <div class="champ-card__photo">
+              <img src="assets/images/dog-bella.jpg" alt="Bella" onerror="this.style.display='none'" />
+              <div class="champ-card__photo-placeholder">&#128054;</div>
+            </div>
+            <div class="champ-card__stripe"></div>
+            <div class="champ-card__body">
+              <div class="champ-card__nick">Bella</div>
+              <div class="champ-card__name">NZ Ch Salinacruz Bella Donna</div>
+              <div class="champ-card__titles">
+                <span class="champ-card__title">NZ Ch</span>
+              </div>
+              <div class="champ-card__origin">Homebred</div>
+            </div>
+          </div>
+
+          <div class="champ-card reveal">
+            <div class="champ-card__photo">
+              <img src="assets/images/dog-claude.jpg" alt="Claude" onerror="this.style.display='none'" />
+              <div class="champ-card__photo-placeholder">&#128054;</div>
+            </div>
+            <div class="champ-card__stripe"></div>
+            <div class="champ-card__body">
+              <div class="champ-card__nick">Claude</div>
+              <div class="champ-card__name">NZ Ch Salinacruz Van Damme with MadraChi</div>
+              <div class="champ-card__titles">
+                <span class="champ-card__title">NZ Ch</span>
+              </div>
+              <div class="champ-card__origin">Co-owned with MadraChi</div>
+            </div>
+          </div>
+
+          <div class="champ-card reveal">
+            <div class="champ-card__photo">
+              <img src="assets/images/dog-lola.jpg" alt="Lola" onerror="this.style.display='none'" />
+              <div class="champ-card__photo-placeholder">&#128054;</div>
+            </div>
+            <div class="champ-card__stripe"></div>
+            <div class="champ-card__body">
+              <div class="champ-card__nick">Lola</div>
+              <div class="champ-card__name">NZ Ch Salinacruz Sharp And Smart</div>
+              <div class="champ-card__titles">
+                <span class="champ-card__title">NZ Ch</span>
+              </div>
+              <div class="champ-card__origin">Homebred</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ROLL OF CHAMPIONS ===== -->
+    <section class="section section--alt">
+      <div class="container">
+        <div class="roll-header reveal">
+          <div>
+            <span class="eyebrow">The Full Record</span>
+            <h2>Roll of Champions</h2>
+          </div>
+          <div style="font-family:var(--serif); font-size:2.5rem; color:var(--orange); font-weight:700;">35+</div>
+        </div>
+        <p class="roll-intro reveal">Every New Zealand champion produced or co-owned by Salinacruz Kennels since 1989. A record built one challenge certificate at a time, across more than three decades of dedication to the smooth coat Chihuahua.</p>
+
+        <div class="reveal" style="overflow-x:auto;">
+          <table class="roll-table">
+            <thead>
+              <tr>
+                <th>Registered Name</th>
+                <th>Nickname</th>
+                <th>Title(s)</th>
+                <th class="origin-cell">Origin</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="name-cell">NZ Grand Ch Salinacruz Jack Flash</td>
+                <td class="nick-cell">Jacko</td>
+                <td class="title-cell">
+                  <span class="roll-badge roll-badge--special">NZ Grand Ch</span>
+                </td>
+                <td class="origin-cell">Homebred</td>
+              </tr>
+              <tr>
+                <td class="name-cell">BISS NZ Ch Misty Meadow&rsquo;s Boston-PC</td>
+                <td class="nick-cell">Eddie</td>
+                <td class="title-cell">
+                  <span class="roll-badge roll-badge--special">BISS</span>
+                  <span class="roll-badge">NZ Ch</span>
+                </td>
+                <td class="origin-cell">Imported &mdash; Italy</td>
+              </tr>
+              <tr>
+                <td class="name-cell">RBISS Ch Salinacruz Prince of Bel-Air</td>
+                <td class="nick-cell">Carlos</td>
+                <td class="title-cell">
+                  <span class="roll-badge roll-badge--special">RBISS</span>
+                  <span class="roll-badge">Ch</span>
+                </td>
+                <td class="origin-cell">Homebred</td>
+              </tr>
+              <tr>
+                <td class="name-cell">BISS Ch Salinacruz Super Sonic</td>
+                <td class="nick-cell">Marco</td>
+                <td class="title-cell">
+                  <span class="roll-badge roll-badge--special">BISS</span>
+                  <span class="roll-badge">Ch</span>
+                </td>
+                <td class="origin-cell">Homebred</td>
+              </tr>
+              <tr>
+                <td class="name-cell">AM Ch &amp; NZ Ch Pasticciotto-PC Di San Gimignano</td>
+                <td class="nick-cell">Otto</td>
+                <td class="title-cell">
+                  <span class="roll-badge roll-badge--special">AM Ch</span>
+                  <span class="roll-badge">NZ Ch</span>
+                </td>
+                <td class="origin-cell">Imported &mdash; Italy</td>
+              </tr>
+              <tr>
+                <td class="name-cell">Ch Salinacruz Madame Sass</td>
+                <td class="nick-cell">Carla</td>
+                <td class="title-cell"><span class="roll-badge">Ch</span></td>
+                <td class="origin-cell">Homebred</td>
+              </tr>
+              <tr>
+                <td class="name-cell">NZ Ch Salinacruz Bella Donna</td>
+                <td class="nick-cell">Bella</td>
+                <td class="title-cell"><span class="roll-badge">NZ Ch</span></td>
+                <td class="origin-cell">Homebred</td>
+              </tr>
+              <tr>
+                <td class="name-cell">NZ Ch Salinacruz Van Damme with MadraChi</td>
+                <td class="nick-cell">Claude</td>
+                <td class="title-cell"><span class="roll-badge">NZ Ch</span></td>
+                <td class="origin-cell">Co-owned</td>
+              </tr>
+              <tr>
+                <td class="name-cell">NZ Ch Salinacruz Sharp And Smart</td>
+                <td class="nick-cell">Lola</td>
+                <td class="title-cell"><span class="roll-badge">NZ Ch</span></td>
+                <td class="origin-cell">Homebred</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="more-note reveal">
+          <span style="font-size:1.5rem;">&#9733;</span>
+          <p><strong>35+ champions and counting.</strong> The full roll of Salinacruz champions spans more than three decades and over 35 title holders. Additional records are being compiled and will be added to this page. Contact Yvonne for information about specific bloodlines or pedigrees.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== INTERNATIONAL CHAMPIONS ===== -->
+    <section class="section">
+      <div class="container">
+        <div class="section__header reveal">
+          <span class="eyebrow">Beyond New Zealand</span>
+          <h2>International Champions</h2>
+          <p class="section__desc">Salinacruz dogs have earned championship titles in four countries &mdash; a testament to the universal quality the kennel produces.</p>
+        </div>
+        <div class="exports-grid">
+          <div class="export-card reveal">
+            <div class="export-card__flag">&#127462;&#127482;</div>
+            <h4>Australia</h4>
+            <p>Salinacruz exports have achieved Australian championship titles across the Tasman. The quality that wins in New Zealand travels well.</p>
+          </div>
+          <div class="export-card reveal">
+            <div class="export-card__flag">&#127482;&#127480;</div>
+            <h4>United States</h4>
+            <p>Otto holds both an American Championship and a New Zealand Championship &mdash; a rare dual-country title holder and a mark of genuine international class.</p>
+          </div>
+          <div class="export-card reveal">
+            <div class="export-card__flag">&#127487;&#127462;</div>
+            <h4>South Africa</h4>
+            <p>Dogs bred at Salinacruz have travelled to South Africa and been successful in that country&rsquo;s show rings, adding another continent to the kennel&rsquo;s map.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="section" style="background:var(--black); padding:4rem 0;">
+      <div class="container" style="text-align:center;">
+        <div class="reveal">
+          <span class="eyebrow" style="color:var(--yellow);">The Dogs Behind the Titles</span>
+          <h2 style="color:var(--white); margin-bottom:1rem; font-size:clamp(1.6rem,3vw,2.2rem);">Meet the Current Show Team</h2>
+          <p style="color:rgba(255,255,255,.6); max-width:500px; margin:0 auto 2rem;">Nine dogs actively competing and adding to this legacy today.</p>
+          <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+            <a href="show-team.html" class="btn btn--primary">View Show Team</a>
+            <a href="contact.html" class="btn btn--outline-light">Puppy Enquiry</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__logo">
+            <img src="assets/images/logo.png" alt="Salinacruz Chihuahuas" class="footer__logo-img" onerror="this.style.display='none'" />
+            <div class="footer__logo-name">Salinacruz Chihuahuas</div>
+          </div>
+          <p>Breeding smooth coat Chihuahuas of exceptional quality in Tauranga, New Zealand since 1989. Home of over 35 New Zealand champions.</p>
+        </div>
+        <div>
+          <h5>Quick Links</h5>
+          <ul class="footer__links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="show-team.html">Show Team</a></li>
+            <li><a href="champions.html">Champions</a></li>
+            <li><a href="puppies.html">Puppies</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer__contact">
+          <h5>Contact</h5>
+          <p>Tauranga, New Zealand</p>
+          <a href="tel:075526719">07 552 6719</a>
+          <a href="mailto:yvonne@salinacruzchihuahuas.com">yvonne@salinacruzchihuahuas.com</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2026 Salinacruz Kennels. All rights reserved.</p>
+        <p>Tauranga, New Zealand &middot; Est. 1989</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/nav.js"></script>
+</body>
+</html>
