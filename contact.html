@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact &mdash; Salinacruz Chihuahuas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="assets/images/logo.png" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+
+    /* ---- CONTACT LAYOUT ---- */
+    .contact-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 5rem; align-items: start; }
+
+    /* ---- FORM ---- */
+    .contact-form { background: var(--white); border: 1px solid var(--border); border-radius: var(--r); padding: 2.5rem; box-shadow: var(--shadow); }
+    .contact-form h2 { font-size: 1.6rem; margin-bottom: .4rem; }
+    .contact-form__sub { color: var(--muted); font-size: .9rem; margin-bottom: 2rem; line-height: 1.6; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: .4rem; margin-bottom: 1.1rem; }
+    .form-group label { font-size: .78rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--black); }
+    .form-group input,
+    .form-group select,
+    .form-group textarea { border: 1.5px solid var(--border); border-radius: var(--r-sm); padding: .75rem 1rem; font-family: var(--sans); font-size: .92rem; color: var(--black); background: var(--white); transition: border-color .2s, box-shadow .2s; outline: none; width: 100%; }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--orange); box-shadow: 0 0 0 3px rgba(224,90,26,.12); }
+    .form-group textarea { resize: vertical; min-height: 130px; }
+    .form-group select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B6557' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 1rem center; padding-right: 2.5rem; cursor: pointer; }
+
+    .form-submit { width: 100%; padding: .9rem; font-size: 1rem; border-radius: 50px; border: none; cursor: pointer; background: linear-gradient(135deg, var(--orange) 0%, #F07820 100%); color: var(--white); font-weight: 700; font-family: var(--sans); transition: all .2s; box-shadow: 0 4px 16px rgba(224,90,26,.3); margin-top: .5rem; }
+    .form-submit:hover { box-shadow: 0 6px 20px rgba(224,90,26,.45); transform: translateY(-1px); }
+
+    .form-note { font-size: .78rem; color: var(--muted); text-align: center; margin-top: .75rem; line-height: 1.5; }
+
+    /* ---- SUCCESS / ERROR states ---- */
+    .form-success { display: none; background: #f0fdf4; border: 1px solid #86efac; border-radius: var(--r-sm); padding: 1.25rem; text-align: center; color: #166534; font-size: .9rem; margin-bottom: 1.25rem; }
+
+    /* ---- CONTACT DETAILS PANEL ---- */
+    .contact-details { display: flex; flex-direction: column; gap: 1.5rem; }
+
+    .contact-detail-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--r); padding: 1.75rem; display: flex; gap: 1.25rem; align-items: flex-start; transition: box-shadow .2s; }
+    .contact-detail-card:hover { box-shadow: var(--shadow); }
+    .contact-detail-card__icon { width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--orange), #F07820); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0; }
+    .contact-detail-card__body { flex: 1; }
+    .contact-detail-card__label { font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: .3rem; }
+    .contact-detail-card__value { font-size: 1rem; font-weight: 600; color: var(--black); margin-bottom: .2rem; }
+    .contact-detail-card__value a { color: var(--black); transition: color .2s; }
+    .contact-detail-card__value a:hover { color: var(--orange); }
+    .contact-detail-card__note { font-size: .82rem; color: var(--muted); line-height: 1.55; }
+
+    /* ---- WHAT TO INCLUDE ---- */
+    .tips-card { background: var(--yellow-light); border: 1px solid var(--border); border-radius: var(--r); padding: 1.75rem; margin-top: .5rem; }
+    .tips-card h4 { font-family: var(--serif); font-size: 1.05rem; margin-bottom: 1rem; }
+    .tips-list { display: flex; flex-direction: column; gap: .6rem; }
+    .tips-list li { display: flex; gap: .6rem; font-size: .85rem; color: var(--muted); line-height: 1.5; }
+    .tips-list li::before { content: '→'; color: var(--orange); font-weight: 700; flex-shrink: 0; }
+
+    /* ---- RESPONSE TIME BAND ---- */
+    .response-band { background: var(--black); padding: 3rem 0; text-align: center; }
+    .response-band p { color: rgba(255,255,255,.65); font-size: .95rem; }
+    .response-band strong { color: var(--yellow); }
+
+    /* ---- MAP PLACEHOLDER ---- */
+    .map-placeholder { background: var(--yellow-light); border-radius: var(--r); height: 300px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: .75rem; border: 1px solid var(--border); }
+    .map-placeholder__icon { font-size: 2.5rem; }
+    .map-placeholder__text { font-size: .9rem; color: var(--muted); text-align: center; }
+    .map-placeholder__text a { color: var(--orange); font-weight: 600; }
+
+    @media (max-width: 900px) {
+      .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <header id="site-header">
+    <nav class="nav container">
+      <a href="index.html" class="nav__logo">
+        <img src="assets/images/logo.png" alt="Salinacruz Chihuahuas" class="nav__logo-img" onerror="this.style.display='none'" />
+        <div class="nav__logo-name">Salinacruz <span>Chihuahuas</span></div>
+      </a>
+      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav__links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="show-team.html">Show Team</a></li>
+        <li><a href="champions.html">Champions</a></li>
+        <li><a href="puppies.html">Puppies</a></li>
+        <li><a href="contact.html" class="active">Contact</a></li>
+        <li><a href="contact.html" class="btn btn--primary nav__cta">Puppy Enquiry</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== PAGE HERO ===== -->
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow">Get in Touch</span>
+        <h1>Contact Yvonne</h1>
+        <p>Whether you have a question about the breed, want to enquire about a puppy, or just want to talk Chihuahuas &mdash; Yvonne loves to hear from people who share her passion.</p>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT SECTION ===== -->
+    <section class="section">
+      <div class="container">
+        <div class="contact-grid">
+
+          <!-- FORM -->
+          <div class="contact-form reveal">
+            <h2>Send a Message</h2>
+            <p class="contact-form__sub">Fill in the form below and Yvonne will get back to you as soon as possible. For urgent enquiries, call directly on <a href="tel:075526719" style="color:var(--orange); font-weight:600;">07 552 6719</a>.</p>
+
+            <div class="form-success" id="form-success">
+              &#10003; &nbsp; Thank you! Your message has been sent. Yvonne will be in touch soon.
+            </div>
+
+            <!-- Replace YOUR_FORM_ID below with your Formspree form ID (formspree.io) -->
+            <form id="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="first-name">First Name *</label>
+                  <input type="text" id="first-name" name="first_name" required placeholder="Jane" />
+                </div>
+                <div class="form-group">
+                  <label for="last-name">Last Name *</label>
+                  <input type="text" id="last-name" name="last_name" required placeholder="Smith" />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" required placeholder="jane@example.com" />
+              </div>
+
+              <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="021 000 0000" />
+              </div>
+
+              <div class="form-group">
+                <label for="enquiry-type">Enquiry Type *</label>
+                <select id="enquiry-type" name="enquiry_type" required>
+                  <option value="" disabled selected>Select one&hellip;</option>
+                  <option value="puppy-pet">Puppy Enquiry &mdash; Pet / Companion</option>
+                  <option value="puppy-show">Puppy Enquiry &mdash; Show / Breeding</option>
+                  <option value="waiting-list">Join the Waiting List</option>
+                  <option value="breed-info">Breed Information</option>
+                  <option value="general">General Question</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="location">Your Location</label>
+                <input type="text" id="location" name="location" placeholder="e.g. Auckland, NZ" />
+              </div>
+
+              <div class="form-group">
+                <label for="message">Your Message *</label>
+                <textarea id="message" name="message" required placeholder="Tell us a little about yourself and what you're looking for&hellip;"></textarea>
+              </div>
+
+              <!-- Honeypot spam trap -->
+              <input type="text" name="_gotcha" style="display:none" />
+              <input type="hidden" name="_subject" value="New enquiry from Salinacruz website" />
+
+              <button type="submit" class="form-submit">Send Message</button>
+              <p class="form-note">We respect your privacy. Your details will never be shared with third parties.</p>
+            </form>
+          </div>
+
+          <!-- DETAILS -->
+          <div class="contact-details reveal">
+
+            <div class="contact-detail-card">
+              <div class="contact-detail-card__icon">&#128222;</div>
+              <div class="contact-detail-card__body">
+                <div class="contact-detail-card__label">Phone</div>
+                <div class="contact-detail-card__value"><a href="tel:075526719">07 552 6719</a></div>
+                <div class="contact-detail-card__note">Best reached during daytime hours. Leave a message and Yvonne will call you back.</div>
+              </div>
+            </div>
+
+            <div class="contact-detail-card">
+              <div class="contact-detail-card__icon">&#9993;</div>
+              <div class="contact-detail-card__body">
+                <div class="contact-detail-card__label">Email</div>
+                <div class="contact-detail-card__value"><a href="mailto:yvonne@salinacruzchihuahuas.com">yvonne@salinacruzchihuahuas.com</a></div>
+                <div class="contact-detail-card__note">Email is a great way to make an initial enquiry. Yvonne typically responds within 1&ndash;2 days.</div>
+              </div>
+            </div>
+
+            <div class="contact-detail-card">
+              <div class="contact-detail-card__icon">&#128205;</div>
+              <div class="contact-detail-card__body">
+                <div class="contact-detail-card__label">Location</div>
+                <div class="contact-detail-card__value">Tauranga, New Zealand</div>
+                <div class="contact-detail-card__note">Salinacruz Kennels is based in Tauranga in the Bay of Plenty. Visits are by appointment only.</div>
+              </div>
+            </div>
+
+            <div class="contact-detail-card">
+              <div class="contact-detail-card__icon">&#128337;</div>
+              <div class="contact-detail-card__body">
+                <div class="contact-detail-card__label">Response Time</div>
+                <div class="contact-detail-card__value">Within 1&ndash;2 days</div>
+                <div class="contact-detail-card__note">Show weekends may cause brief delays. For time-sensitive matters, calling is always the fastest option.</div>
+              </div>
+            </div>
+
+            <div class="tips-card">
+              <h4>What to Include in Your Enquiry</h4>
+              <ul class="tips-list">
+                <li>A little about yourself and your household</li>
+                <li>Whether you have owned Chihuahuas or toy breeds before</li>
+                <li>Whether you are looking for a show, breeding, or companion puppy</li>
+                <li>Your general location in New Zealand</li>
+                <li>Any questions you have about the breed or the process</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== MAP ===== -->
+    <section class="section section--alt" style="padding-top:0;">
+      <div class="container">
+        <div class="section__header reveal" style="padding-top:5rem;">
+          <span class="eyebrow">Find Us</span>
+          <h2>Tauranga, Bay of Plenty</h2>
+          <p class="section__desc">Salinacruz Kennels is located in Tauranga. Visits are by appointment &mdash; please contact us before making the trip.</p>
+        </div>
+        <div class="reveal">
+          <iframe
+            src="https://maps.google.com/maps?q=Tauranga,+New+Zealand&output=embed&z=12"
+            width="100%"
+            height="360"
+            style="border:0; border-radius:var(--r); display:block;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Tauranga, New Zealand">
+          </iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== RESPONSE BAND ===== -->
+    <div class="response-band">
+      <div class="container">
+        <p>Prefer to call? Reach Yvonne on <strong><a href="tel:075526719" style="color:var(--yellow);">07 552 6719</a></strong> &mdash; the fastest way to get an answer.</p>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__logo">
+            <img src="assets/images/logo.png" alt="Salinacruz Chihuahuas" class="footer__logo-img" onerror="this.style.display='none'" />
+            <div class="footer__logo-name">Salinacruz Chihuahuas</div>
+          </div>
+          <p>Breeding smooth coat Chihuahuas of exceptional quality in Tauranga, New Zealand since 1989. Home of over 35 New Zealand champions.</p>
+        </div>
+        <div>
+          <h5>Quick Links</h5>
+          <ul class="footer__links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="show-team.html">Show Team</a></li>
+            <li><a href="champions.html">Champions</a></li>
+            <li><a href="puppies.html">Puppies</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer__contact">
+          <h5>Contact</h5>
+          <p>Tauranga, New Zealand</p>
+          <a href="tel:075526719">07 552 6719</a>
+          <a href="mailto:yvonne@salinacruzchihuahuas.com">yvonne@salinacruzchihuahuas.com</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2026 Salinacruz Kennels. All rights reserved.</p>
+        <p>Tauranga, New Zealand &middot; Est. 1989</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/nav.js"></script>
+  <script>
+    const form = document.getElementById('contact-form');
+    const success = document.getElementById('form-success');
+    if (form) {
+      form.addEventListener('submit', async e => {
+        const action = form.getAttribute('action');
+        if (action.includes('YOUR_FORM_ID')) return; // fallback — let native submit handle it
+        e.preventDefault();
+        const btn = form.querySelector('.form-submit');
+        btn.textContent = 'Sending…';
+        btn.disabled = true;
+        try {
+          const res = await fetch(action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+          if (res.ok) {
+            success.style.display = 'block';
+            form.reset();
+          } else {
+            btn.textContent = 'Send Message';
+            btn.disabled = false;
+            alert('Something went wrong. Please try calling or emailing directly.');
+          }
+        } catch {
+          btn.textContent = 'Send Message';
+          btn.disabled = false;
+          alert('Something went wrong. Please try calling or emailing directly.');
+        }
+      });
+    }
+  </script>
+</body>
+</html>
