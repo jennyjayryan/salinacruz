@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>International Imports &mdash; Salinacruz Chihuahuas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="assets/images/logo.png" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+
+    /* ---- IMPORT CARD GRID ---- */
+    .imports-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    .import-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      overflow: hidden;
+      transition: transform .2s, box-shadow .2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .import-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Top accent stripe colour-coded by country */
+    .import-card__stripe {
+      height: 4px;
+      background: linear-gradient(90deg, var(--orange), var(--yellow));
+    }
+    .import-card__stripe--italy  { background: linear-gradient(90deg, #009246, #fff, #CE2B37); }
+    .import-card__stripe--japan  { background: linear-gradient(90deg, #BC002D, #fff, #BC002D); }
+    .import-card__stripe--latvia { background: linear-gradient(90deg, #9E3039, #fff, #9E3039); }
+    .import-card__stripe--france { background: linear-gradient(90deg, #002395, #fff, #ED2939); }
+    .import-card__stripe--usa    { background: linear-gradient(90deg, #3C3B6E, #B22234, #3C3B6E); }
+
+    /* Photo */
+    .import-card__photo {
+      height: 240px;
+      background: var(--yellow-light);
+      overflow: hidden;
+      position: relative;
+    }
+    .import-card__photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
+      transition: transform .4s;
+      display: block;
+    }
+    .import-card:hover .import-card__photo img { transform: scale(1.05); }
+    .import-card__photo-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+      color: var(--yellow-dark);
+      opacity: .2;
+    }
+    .import-card__flag {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 2rem;
+      line-height: 1;
+      background: rgba(255,255,255,.9);
+      border-radius: var(--r-sm);
+      padding: .3rem .5rem;
+      box-shadow: var(--shadow);
+    }
+
+    /* Body */
+    .import-card__body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+    .import-card__origin {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: .6rem;
+    }
+    .import-card__nick {
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--yellow-dark);
+      background: var(--yellow-light);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: .15rem .5rem;
+      display: inline-block;
+      margin-bottom: .5rem;
+    }
+    .import-card__name {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      color: var(--black);
+      line-height: 1.35;
+      margin-bottom: .85rem;
+    }
+    .import-card__titles {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .3rem;
+      margin-bottom: 1rem;
+    }
+    .import-card__title {
+      font-size: .62rem;
+      font-weight: 700;
+      background: var(--yellow-light);
+      color: var(--yellow-dark);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: .12rem .45rem;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+    .import-card__title--top {
+      background: linear-gradient(135deg, var(--orange), #F07820);
+      color: var(--white);
+      border-color: transparent;
+    }
+    .import-card__desc {
+      font-size: .88rem;
+      color: var(--muted);
+      line-height: 1.7;
+      flex: 1;
+    }
+
+    /* ---- GLOBE BAND ---- */
+    .globe-band {
+      background: var(--black);
+      padding: 4.5rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .globe-band::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(224,90,26,.18) 0%, rgba(245,197,0,.08) 40%, transparent 65%);
+      pointer-events: none;
+    }
+    .globe-band__inner {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1.5rem;
+      text-align: center;
+    }
+    .globe-item__flag { font-size: 2.4rem; display: block; margin-bottom: .5rem; }
+    .globe-item__country {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.5);
+    }
+    .globe-item__count {
+      font-family: var(--serif);
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--yellow);
+      display: block;
+      margin-top: .25rem;
+    }
+
+    @media (max-width: 900px) {
+      .imports-grid { grid-template-columns: 1fr; }
+      .globe-band__inner { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 560px) {
+      .globe-band__inner { grid-template-columns: repeat(2, 1fr); }
+      .import-card__photo { height: 200px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <header id="site-header">
+    <nav class="nav container">
+      <a href="index.html" class="nav__logo">
+        <img src="assets/images/logo.png" alt="Salinacruz Chihuahuas" class="nav__logo-img" onerror="this.style.display='none'" />
+        <div class="nav__logo-name">Salinacruz <span>Chihuahuas</span></div>
+      </a>
+      <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav__links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="show-team.html">Show Team</a></li>
+        <li class="nav__item">
+          <button class="nav__dropdown-btn" aria-expanded="false" style="color:var(--orange)">Champions</button>
+          <ul class="nav__submenu">
+            <li><a href="champions.html">Champions</a></li>
+            <li><a href="imports.html" class="active">Imports</a></li>
+          </ul>
+        </li>
+        <li><a href="puppies.html">Puppies</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="contact.html" class="btn btn--primary nav__cta">Puppy Enquiry</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== PAGE HERO ===== -->
+    <section class="page-hero">
+      <div class="container">
+        <span class="eyebrow">Around the World</span>
+        <h1>International Imports</h1>
+        <p>Salinacruz has sought out the finest Chihuahua bloodlines from across the globe &mdash; Italy, the USA, Japan, France, and Latvia &mdash; bringing world-class genetics to New Zealand.</p>
+      </div>
+    </section>
+
+    <!-- ===== GLOBE COUNTRIES BAND ===== -->
+    <div class="globe-band">
+      <div class="container">
+        <div class="globe-band__inner">
+          <div class="globe-item">
+            <span class="globe-item__flag">🇮🇹</span>
+            <span class="globe-item__country">Italy</span>
+            <span class="globe-item__count">2</span>
+          </div>
+          <div class="globe-item">
+            <span class="globe-item__flag">🇺🇸</span>
+            <span class="globe-item__country">USA</span>
+            <span class="globe-item__count">2</span>
+          </div>
+          <div class="globe-item">
+            <span class="globe-item__flag">🇯🇵</span>
+            <span class="globe-item__country">Japan</span>
+            <span class="globe-item__count">1</span>
+          </div>
+          <div class="globe-item">
+            <span class="globe-item__flag">🇫🇷</span>
+            <span class="globe-item__country">France</span>
+            <span class="globe-item__count">1</span>
+          </div>
+          <div class="globe-item">
+            <span class="globe-item__flag">🇱🇻</span>
+            <span class="globe-item__country">Latvia</span>
+            <span class="globe-item__count">1</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== IMPORTS GRID ===== -->
+    <section class="section">
+      <div class="container">
+        <div class="section__header reveal">
+          <span class="eyebrow">Global Bloodlines</span>
+          <h2>Our Imported Dogs</h2>
+          <p class="section__desc">Every import has been carefully selected to complement and strengthen the Salinacruz breeding programme.</p>
+        </div>
+
+        <div class="imports-grid">
+
+          <!-- Italy #1 — Eddie -->
+          <div class="import-card reveal">
+            <div class="import-card__stripe import-card__stripe--italy"></div>
+            <div class="import-card__photo">
+              <img src="assets/images/dog-eddie.jpg" alt="NZ Ch Misty Meadow's Boston-PC" onerror="this.style.display='none'" />
+              <div class="import-card__photo-placeholder">&#128054;</div>
+              <span class="import-card__flag">🇮🇹</span>
+            </div>
+            <div class="import-card__body">
+              <span class="import-card__origin">&#127760; Imported from Italy</span>
+              <span class="import-card__nick">&#8220;Eddie&#8221;</span>
+              <h3 class="import-card__name">NZ Ch Misty Meadow&rsquo;s Boston-PC</h3>
+              <div class="import-card__titles">
+                <span class="import-card__title import-card__title--top">BISS</span>
+                <span class="import-card__title">NZ Champion</span>
+                <span class="import-card__title">Imp Italy</span>
+              </div>
+              <p class="import-card__desc">Best in Show Specialist and New Zealand Champion. Eddie arrived from Italy bringing outstanding European structure and type that has proven highly influential in our breeding programme.</p>
+            </div>
+          </div>
+
+          <!-- Italy #2 — Otto -->
+          <div class="import-card reveal">
+            <div class="import-card__stripe import-card__stripe--italy"></div>
+            <div class="import-card__photo">
+              <img src="assets/images/dog-otto.jpg" alt="AM Ch &amp; NZ Ch Pasticciotto-PC Di San Gimignano" onerror="this.style.display='none'" />
+              <div class="import-card__photo-placeholder">&#128054;</div>
+              <span class="import-card__flag">🇮🇹</span>
+            </div>
+            <div class="import-card__body">
+              <span class="import-card__origin">&#127760; Imported from Italy</span>
+              <span class="import-card__nick">&#8220;Otto&#8221;</span>
+              <h3 class="import-card__name">AM Ch &amp; NZ Ch Pasticciotto-PC Di San Gimignano</h3>
+              <div class="import-card__titles">
+                <span class="import-card__title import-card__title--top">AM Champion</span>
+                <span class="import-card__title">NZ Champion</span>
+                <span class="import-card__title">Imp Italy</span>
+              </div>
+              <p class="import-card__desc">A dual American and New Zealand Champion imported from Italy. Otto is a dog of exceptional distinction, having achieved championship status in two countries and bringing elite Italian bloodlines to New Zealand.</p>
+            </div>
+          </div>
+
+          <!-- USA #1 — Aztec Legend -->
+          <div class="import-card reveal">
+            <div class="import-card__stripe import-card__stripe--usa"></div>
+            <div class="import-card__photo">
+              <img src="assets/images/dog-aztec.jpg" alt="AM GCH &amp; CAN Ch &amp; NZ Ch White O Morns Aztec Legend" onerror="this.style.display='none'" />
+              <div class="import-card__photo-placeholder">&#128054;</div>
+              <span class="import-card__flag">🇺🇸</span>
+            </div>
+            <div class="import-card__body">
+              <span class="import-card__origin">&#127760; Imported from USA</span>
+              <h3 class="import-card__name">AM GCH &amp; CAN Ch &amp; NZ Ch White O Morns Aztec Legend</h3>
+              <div class="import-card__titles">
+                <span class="import-card__title import-card__title--top">AM Grand Champion</span>
+                <span class="import-card__title">CAN Champion</span>
+                <span class="import-card__title">NZ Champion</span>
+                <span class="import-card__title">Imp USA</span>
+              </div>
+              <p class="import-card__desc">A tri-country champion of the highest order &mdash; American Grand Champion, Canadian Champion, and New Zealand Champion. Aztec Legend represents some of the finest American show bloodlines available.</p>
+            </div>
+          </div>
+
+          <!-- USA #2 — Tanzanite -->
+          <div class="import-card reveal">
+            <div class="import-card__stripe import-card__stripe--usa"></div>
+            <div class="import-card__photo">
+              <div class="import-card__photo-placeholder">&#128054;</div>
+              <span class="import-card__flag">🇺🇸</span>
+            </div>
+            <div class="import-card__body">
+              <span class="import-card__origin">&#127760; Imported from USA</span>
+              <h3 class="import-card__name">AM Ch &amp; CAN Ch, NZ Ch &amp; AUST Ch Daggot&rsquo;s Well-Cut Tanzanite</h3>
+              <div class="import-card__titles">
+                <span class="import-card__title import-card__title--top">AM Champion</span>
+                <span class="import-card__title">CAN Champion</span>
+                <span class="import-card__title">NZ Champion</span>
+                <span class="import-card__title">AUST Champion</span>
+                <span class="import-card__title">Imp USA</span>
+              </div>
+              <p class="import-card__desc">An extraordinary four-country champion &mdash; American, Canadian, New Zealand, and Australian titles. Tanzanite is one of the most titled imports Salinacruz has brought to New Zealand, with championships spanning three continents.</p>
+            </div>
+          </div>
+
+          <!-- Japan -->
+          <div class="import-card reveal">
+            <div class="import-card__stripe import-card__stripe--japan"></div>
+            <div class="import-card__photo">
+              <img src="assets/images/dog-brahman.jpg" alt="Bramver's Brahman" onerror="this.style.display='none'" />
+              <div class="import-card__photo-placeholder">&#128054;</div>
+              <span class="import-card__flag">🇯🇵</span>
+            </div>
+            <div class="import-card__body">
+              <span class="import-card__origin">&#127760; Imported from Japan</span>
+              <h3 class="import-card__name">Bramver&rsquo;s Brahman</h3>
+              <div class="import-card__titles">
+                <span class="import-card__title">Imp Japan</span>
+              </div>
+              <p class="import-card__desc">Imported from Japan, where Chihuahua breeding is held to an exceptionally high standard. Brahman contributes unique Eastern bloodlines rarely seen in New Zealand, adding valuable diversity to the Salinacruz gene pool.</p>
+            </div>
+          </div>
+
+          <!-- Latvia -->
+          <div class="import-card reveal">
+            <div class="import-card__stripe import-card__stripe--latvia"></div>
+            <div class="import-card__photo">
+              <img src="assets/images/dog-orlando.jpg" alt="NZ Ch Lanas Legacy Orlando" onerror="this.style.display='none'" />
+              <div class="import-card__photo-placeholder">&#128054;</div>
+              <span class="import-card__flag">🇱🇻</span>
+            </div>
+            <div class="import-card__body">
+              <span class="import-card__origin">&#127760; Imported from Latvia</span>
+              <h3 class="import-card__name">NZ Ch Lanas Legacy Orlando</h3>
+              <div class="import-card__titles">
+                <span class="import-card__title import-card__title--top">NZ Champion</span>
+                <span class="import-card__title">Imp Latvia</span>
+              </div>
+              <p class="import-card__desc">A New Zealand Champion sourced from Latvia, tapping into the strong Eastern European Chihuahua breeding tradition. Orlando has proven his worth both in the show ring and as a breeding asset at Salinacruz.</p>
+            </div>
+          </div>
+
+          <!-- France -->
+          <div class="import-card reveal">
+            <div class="import-card__stripe import-card__stripe--france"></div>
+            <div class="import-card__photo">
+              <img src="assets/images/dog-mayerling.jpg" alt="Mayerling of Alixora Blue" onerror="this.style.display='none'" />
+              <div class="import-card__photo-placeholder">&#128054;</div>
+              <span class="import-card__flag">🇫🇷</span>
+            </div>
+            <div class="import-card__body">
+              <span class="import-card__origin">&#127760; Imported from France</span>
+              <h3 class="import-card__name">Mayerling of Alixora Blue</h3>
+              <div class="import-card__titles">
+                <span class="import-card__title">Imp France</span>
+              </div>
+              <p class="import-card__desc">Sourced from France, bringing the refined European style that French breeders are renowned for. Mayerling of Alixora Blue adds a distinctive French influence to the Salinacruz bloodlines, broadening the international reach of our programme.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA BAND ===== -->
+    <section class="section section--alt">
+      <div class="container" style="text-align:center;">
+        <span class="eyebrow">Our Record</span>
+        <h2 style="margin-bottom:1rem;">35+ New Zealand Champions</h2>
+        <p style="color:var(--muted); max-width:560px; margin:0 auto 2rem;">These international imports, combined with our own homebred lines, have helped Salinacruz produce over 35 New Zealand champions across more than 35 years of breeding.</p>
+        <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+          <a href="champions.html" class="btn btn--primary">View Champions &rarr;</a>
+          <a href="show-team.html" class="btn btn--outline">Meet the Show Team</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__logo">
+            <img src="assets/images/logo.png" alt="Salinacruz Chihuahuas" class="footer__logo-img" onerror="this.style.display='none'" />
+            <div class="footer__logo-name">Salinacruz Chihuahuas</div>
+          </div>
+          <p>Breeding long and smooth coat Chihuahuas of exceptional quality in Tauranga, New Zealand since 1989. Home of over 35 New Zealand champions.</p>
+        </div>
+        <div>
+          <h5>Quick Links</h5>
+          <ul class="footer__links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="show-team.html">Show Team</a></li>
+            <li><a href="champions.html">Champions</a></li>
+            <li><a href="imports.html">Imports</a></li>
+            <li><a href="puppies.html">Puppies</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer__contact">
+          <h5>Contact</h5>
+          <p>Tauranga, New Zealand</p>
+          <a href="tel:075526719">07 552 6719</a>
+          <a href="mailto:Salinacruz@xtra.co.nz">Salinacruz@xtra.co.nz</a>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <p>&copy; 2026 Salinacruz Kennels. All rights reserved.</p>
+        <p>Tauranga, New Zealand &middot; Est. 1989</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/nav.js"></script>
+</body>
+</html>
