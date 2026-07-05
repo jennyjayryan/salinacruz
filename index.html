@@ -9,6 +9,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/png" href="assets/images/logo.png" />
   <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    .hero__content { max-width: 1160px; display: flex; align-items: center; justify-content: space-between; gap: 3rem; }
+    .hero__text { flex: 1; max-width: 600px; }
+    .hero__logo-hero { flex-shrink: 0; }
+    .hero__logo-hero img { width: 260px; height: 260px; border-radius: 50%; border: 4px solid var(--yellow); box-shadow: 0 0 60px rgba(245,197,0,.35), 0 8px 40px rgba(0,0,0,.5); object-fit: cover; display: block; }
+    @media (max-width: 860px) {
+      .hero__content { flex-direction: column-reverse; align-items: flex-start; gap: 2rem; }
+      .hero__logo-hero img { width: 160px; height: 160px; }
+    }
+  </style>
 </head>
 <body>
 
@@ -49,14 +59,19 @@
       <div class="hero__accent"></div>
       <div class="hero__accent2"></div>
       <div class="hero__content container">
-        <span class="hero__eyebrow">Tauranga, New Zealand &middot; Est. 1989</span>
-        <h1 class="hero__title">
-          Breeding Champions<br>for <em>Over 35 Years</em>
-        </h1>
-        <p class="hero__subtitle">Salinacruz Kennels — home of New Zealand&rsquo;s finest long and smooth coat Chihuahuas. Over 35 homegrown champions, with dogs competing and winning across New Zealand, Australia, and beyond.</p>
-        <div class="hero__ctas">
-          <a href="show-team.html" class="btn btn--primary">Meet the Show Team</a>
-          <a href="about.html" class="btn btn--outline-light">Our Story</a>
+        <div class="hero__text">
+          <span class="hero__eyebrow">Tauranga, New Zealand &middot; Est. 1989</span>
+          <h1 class="hero__title">
+            Breeding Champions<br>for <em>Over 35 Years</em>
+          </h1>
+          <p class="hero__subtitle">Salinacruz Kennels — home of New Zealand&rsquo;s finest long and smooth coat Chihuahuas. Over 35 homegrown champions, with dogs competing and winning across New Zealand, Australia, and beyond.</p>
+          <div class="hero__ctas">
+            <a href="show-team.html" class="btn btn--primary">Meet the Show Team</a>
+            <a href="about.html" class="btn btn--outline-light">Our Story</a>
+          </div>
+        </div>
+        <div class="hero__logo-hero">
+          <img src="assets/images/logo.png" alt="Salinacruz Chihuahuas" />
         </div>
       </div>
       <div class="hero__badge">
